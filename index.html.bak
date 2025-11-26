@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-    <!-- LP DEGUSTAÇÃO GRATUITA - BANCA PACHECO -->
+    <!-- LP DEGUSTAÇÃO CORTESIA - BANCA PACHECO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -30,19 +30,23 @@
     <meta property="twitter:image" content="https://bancadopacheco.com.br/hero/IMG_9692.webp">
     
     <!-- Favicon -->
-    <link rel="icon" href="../03-LANDING-PAGE-PROMOCOES-BANCA/wp-content/uploads/2025/07/Imagens-Categorias-pacheco-2-100x100.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="../03-LANDING-PAGE-PROMOCOES-BANCA/wp-content/uploads/2025/07/Imagens-Categorias-pacheco-2-100x100.png">
+    <link rel="icon" href="wp-content/uploads/2025/07/Copia-de-Imagens-Categorias-pacheco.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="wp-content/uploads/2025/07/Copia-de-Imagens-Categorias-pacheco.png">
     
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://wa.me">
+    <link rel="preconnect" href="https://hooks.make.com">
+    <link rel="preconnect" href="https://www.facebook.com">
+    <link rel="preconnect" href="https://connect.facebook.net">
     
     <!-- Preload imagens críticas -->
-    <link rel="preload" as="image" href="../03-LANDING-PAGE-PROMOCOES-BANCA/hero/IMG_9692.webp" fetchpriority="high">
-    <link rel="preload" as="image" href="../03-LANDING-PAGE-PROMOCOES-BANCA/wp-content/uploads/2025/06/logomarca-pacheco-01-1.png">
+    <link rel="preload" as="image" href="hero/IMG_9692.webp" fetchpriority="high" imagesrcset="hero/IMG_9692.webp 1920w" imagesizes="100vw">
+    <link rel="preload" as="image" href="wp-content/uploads/2025/06/logomarca-pacheco-01-1.png" fetchpriority="high">
     
-    <!-- Fontes -->
+    <!-- Fontes - carregamento otimizado -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
     
@@ -97,6 +101,7 @@
         .header-logo img {
             height: 50px;
             width: auto;
+            aspect-ratio: 3/1;
         }
 
         .header-btn {
@@ -205,6 +210,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            aspect-ratio: 1/1;
         }
 
         .hero-background {
@@ -235,6 +241,7 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
+            aspect-ratio: 16/9;
         }
 
         .hero-overlay {
@@ -1323,6 +1330,11 @@
                 padding: 12px;
                 font-size: 0.8rem;
             }
+
+            /* Modal Captura - Mobile */
+            .modal h3 {
+                font-size: 1.2rem;
+            }
         }
 
         @media (min-width: 769px) {
@@ -1450,33 +1462,6 @@
         }
 
     </style>
-
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1914948786073743');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1914948786073743&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
-
-    <!-- Microsoft Clarity -->
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "ubo9iaiokv");
-    </script>
 </head>
 <body>
     <noscript>
@@ -1505,14 +1490,14 @@
         <!-- Background dinâmico com 2 imagens -->
         <div class="hero-background">
             <div class="hero-bg-item active">
-                <img src="../03-LANDING-PAGE-PROMOCOES-BANCA/hero/IMG_9692.webp" 
+                <img src="hero/IMG_9692.webp" 
                      alt="Degustação gratuita de queijos e frios artesanais - Banca Pacheco" 
                      width="1920" 
                      height="1080"
                      fetchpriority="high">
             </div>
             <div class="hero-bg-item">
-                <img src="../03-LANDING-PAGE-PROMOCOES-BANCA/hero/IMG_9863.webp" 
+                <img src="hero/IMG_9863.webp" 
                      alt="Atendimento especializado e fatiado na hora - Banca Pacheco" 
                      width="1920" 
                      height="1080"
@@ -1534,7 +1519,7 @@
         <div class="hero-content">
             <div class="promo-badge">🧀 DEGUSTAÇÃO CORTESIA</div>
             <h1 class="hero-title">EXPERIMENTE ANTES<br>DE DECIDIR</h1>
-            <div class="hero-discount">SEM COMPROMISSO</div>
+            <div class="hero-discount">FATIADO NA HORA</div>
             <p class="hero-subtitle">
                 Na Banca Pacheco você <strong>PROVA TUDO ANTES</strong> de levar para casa.<br>
                 <strong>Atendimento personalizado • Fatiado na hora • Produtos exclusivos.</strong><br>
@@ -1716,7 +1701,7 @@
             <div class="modal-body">
                 <div class="stores-list">
                     <div class="store-item">
-                        <img src="../03-LANDING-PAGE-PROMOCOES-BANCA/Imagens das bancas/banca-beira-mar.webp" 
+                        <img src="Imagens das bancas/banca-beira-mar.webp" 
                              alt="Loja Banca Pacheco Beiramar Shopping Florianópolis" 
                              class="store-image"
                              width="180"
@@ -1744,7 +1729,7 @@
                         </div>
                     </div>
                     <div class="store-item">
-                        <img src="../03-LANDING-PAGE-PROMOCOES-BANCA/Imagens das bancas/banca-coqueiros.webp" 
+                        <img src="Imagens das bancas/banca-coqueiros.webp" 
                              alt="Loja Banca Pacheco Coqueiros Florianópolis" 
                              class="store-image"
                              width="180"
@@ -1772,7 +1757,7 @@
                         </div>
                     </div>
                     <div class="store-item">
-                        <img src="../03-LANDING-PAGE-PROMOCOES-BANCA/Imagens das bancas/banca-campinas.webp" 
+                        <img src="Imagens das bancas/banca-campinas.webp" 
                              alt="Loja Banca Pacheco Campinas São José" 
                              class="store-image"
                              width="180"
@@ -1800,7 +1785,7 @@
                         </div>
                     </div>
                     <div class="store-item">
-                        <img src="../03-LANDING-PAGE-PROMOCOES-BANCA/Imagens das bancas/banca-santa-monica-0023.webp" 
+                        <img src="Imagens das bancas/banca-santa-monica-0023.webp" 
                              alt="Loja Banca Pacheco Santa Mônica Florianópolis" 
                              class="store-image"
                              width="180"
@@ -1839,7 +1824,7 @@
         <h2 class="section-title">Nossas Localizações</h2>
         <div class="bancas-grid">
             <div class="banca-card">
-                <img src="../03-LANDING-PAGE-PROMOCOES-BANCA/Imagens das bancas/banca-beira-mar.webp" alt="Banca Pacheco Beiramar" class="banca-img" width="180" height="135" loading="lazy">
+                <img src="Imagens das bancas/banca-beira-mar.webp" alt="Banca Pacheco Beiramar" class="banca-img" width="180" height="135" loading="lazy">
                 <div class="banca-info">
                     <h3>Banca Pacheco Beiramar</h3>
                     <p>📍 Florianópolis - SC<br>Shopping Beiramar</p>
@@ -1849,7 +1834,7 @@
                 </div>
             </div>
             <div class="banca-card">
-                <img src="../03-LANDING-PAGE-PROMOCOES-BANCA/Imagens das bancas/banca-coqueiros.webp" alt="Banca Pacheco Coqueiros" class="banca-img" width="180" height="135" loading="lazy">
+                <img src="Imagens das bancas/banca-coqueiros.webp" alt="Banca Pacheco Coqueiros" class="banca-img" width="180" height="135" loading="lazy">
                 <div class="banca-info">
                     <h3>Banca Pacheco Coqueiros</h3>
                     <p>📍 Florianópolis - SC<br>Bairro Coqueiros</p>
@@ -1859,7 +1844,7 @@
                 </div>
             </div>
             <div class="banca-card">
-                <img src="../03-LANDING-PAGE-PROMOCOES-BANCA/Imagens das bancas/banca-campinas.webp" alt="Banca Pacheco Campinas" class="banca-img" width="180" height="135" loading="lazy">
+                <img src="Imagens das bancas/banca-campinas.webp" alt="Banca Pacheco Campinas" class="banca-img" width="180" height="135" loading="lazy">
                 <div class="banca-info">
                     <h3>Banca Pacheco Campinas</h3>
                     <p>📍 São José - SC<br>Bairro Campinas</p>
@@ -1869,7 +1854,7 @@
                 </div>
             </div>
             <div class="banca-card">
-                <img src="../03-LANDING-PAGE-PROMOCOES-BANCA/Imagens das bancas/banca-santa-monica-0023.webp" alt="Banca Pacheco Santa Mônica" class="banca-img" width="180" height="135" loading="lazy">
+                <img src="Imagens das bancas/banca-santa-monica-0023.webp" alt="Banca Pacheco Santa Mônica" class="banca-img" width="180" height="135" loading="lazy">
                 <div class="banca-info">
                     <h3>Banca Pacheco Santa Mônica</h3>
                     <p>📍 Florianópolis - SC<br>Bairro Santa Mônica</p>
@@ -1914,17 +1899,17 @@
 
     <!-- WhatsApp Float Button -->
     <a href="javascript:void(0)" class="whatsapp-float" onclick="abrirWhatsApp('Atendimento Geral')" title="WhatsApp" aria-label="Abrir WhatsApp">
-        <img src="../03-LANDING-PAGE-PROMOCOES-BANCA/whatsappicon.webp" alt="WhatsApp Atendimento" width="42" height="42" decoding="async">
+        <img src="whatsappicon.webp" alt="WhatsApp Atendimento" width="42" height="42" decoding="async">
     </a>
 
     <!-- Modal Captura Nome -->
     <div id="modalCapturaNome" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="fecharCaptura()">&times;</button>
-            <h3 id="capturaSubtitulo">Agendar Degustação Cortesia</h3>
-            <p id="capturaAviso">✅ Digite seu nome e telefone WhatsApp para seguirmos com seu atendimento</p>
-            <input type="text" id="nomeCaptura" placeholder="Seu primeiro nome" aria-label="Digite seu nome">
-            <input type="tel" id="telefoneCaptura" placeholder="Seu WhatsApp (com DDD)" aria-label="Digite seu telefone">
+            <h3 id="capturaSubtitulo">Vamos Enviar Nossas Localizações e Promoções pelo WhatsApp</h3>
+            <p id="capturaAviso">✅ Preenche nome e telefone que vamos lhe chamar no WhatsApp</p>
+            <input type="text" id="nomeCaptura" placeholder="Seu primeiro nome" aria-label="Digite seu nome" style="display:block;">
+            <input type="tel" id="telefoneCaptura" placeholder="Seu WhatsApp (com DDD)" aria-label="Digite seu telefone" style="display:none;">
             <div id="capturaSucesso" style="display:none; margin-top: 12px; color: #25D366; font-weight: 600;">
                 ✅ Obrigado! Vamos enviar uma mensagem no WhatsApp para você em instantes.
             </div>
@@ -1932,7 +1917,7 @@
                 <button class="modal-btn modal-btn-cancel" onclick="fecharCaptura()">
                     Cancelar
                 </button>
-                <button class="modal-btn modal-btn-submit" onclick="enviarCaptura()">
+                <button class="modal-btn modal-btn-submit" onclick="enviarCaptura()" id="btnContinuar">
                     Continuar →
                 </button>
             </div>
@@ -1946,11 +1931,9 @@
         // Variável global para armazenar o nome do lead após captura
         let nomeLeadCapturado = '';
 
-        // Debug: Verificar se modal existe ao carregar
-        console.log('Script carregado');
+        // Inicialização ao carregar a página
         document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('modalLojas');
-            console.log('Modal encontrado:', modal ? 'SIM' : 'NÃO');
+            renderizarMarquees();
         });
         
         async function enviarWebhook(dados) {
@@ -2038,31 +2021,44 @@
             abrirCapturaWhatsApp(produto, secao);
         }
 
-        // VARIÁVEIS PARA CAPTURA
-        let capturaAcao = 'whatsapp';
-        let capturaProduto = '';
+    // VARIÁVEIS PARA CAPTURA
+    let capturaAcao = 'whatsapp';
+    let capturaProduto = '';
+    let capturaSecao = '';
 
         // ABRIR MODAL DE CAPTURA PARA WHATSAPP
         function abrirCapturaWhatsApp(produto, secao = 'produtos') {
             capturaAcao = 'whatsapp';
             capturaProduto = produto;
+            capturaSecao = secao;
             
-            document.getElementById('capturaSubtitulo').textContent = 'Agendar Degustação Cortesia';
-            document.getElementById('capturaAviso').textContent = '✅ Digite seu nome e WhatsApp para seguirmos com seu atendimento';
+            // Garante que inicia mostrando campo de nome
+            const nomeInput = document.getElementById('nomeCaptura');
+            const telefoneInput = document.getElementById('telefoneCaptura');
+            nomeInput.style.display = 'block';
+            telefoneInput.style.display = 'none';
             
             document.getElementById('modalCapturaNome').style.display = 'flex';
-            document.getElementById('nomeCaptura').focus();
+            nomeInput.focus();
         }
 
         // FECHAR MODAL DE CAPTURA
         function fecharCaptura() {
             document.getElementById('modalCapturaNome').style.display = 'none';
-            document.getElementById('nomeCaptura').value = '';
-            const tel = document.getElementById('telefoneCaptura');
-            if (tel) tel.value = '';
+            const nomeInput = document.getElementById('nomeCaptura');
+            const telefoneInput = document.getElementById('telefoneCaptura');
+            
+            nomeInput.value = '';
+            telefoneInput.value = '';
+            
+            // Reseta para mostrar nome primeiro
+            nomeInput.style.display = 'block';
+            telefoneInput.style.display = 'none';
+            
             const sucesso = document.getElementById('capturaSucesso');
             if (sucesso) sucesso.style.display = 'none';
-            const submitBtn = document.querySelector('.modal-btn-submit');
+            
+            const submitBtn = document.getElementById('btnContinuar');
             if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Continuar →';
@@ -2082,23 +2078,36 @@
 
         // ENVIAR CAPTURA
         function enviarCaptura() {
-            const nome = document.getElementById('nomeCaptura').value.trim();
-            const telefone = document.getElementById('telefoneCaptura').value.trim();
+            const nomeInput = document.getElementById('nomeCaptura');
+            const telefoneInput = document.getElementById('telefoneCaptura');
+            const btnContinuar = document.getElementById('btnContinuar');
+            const nome = nomeInput.value.trim();
+            const telefone = telefoneInput.value.trim();
             
-            if (!nome) {
-                alert('Por favor, digite seu nome para continuar.');
+            // Primeira etapa: capturar nome
+            if (telefoneInput.style.display === 'none') {
+                if (!nome) {
+                    alert('Por favor, digite seu nome para continuar.');
+                    return;
+                }
+                // Esconde nome e mostra telefone
+                nomeInput.style.display = 'none';
+                telefoneInput.style.display = 'block';
+                telefoneInput.focus();
                 return;
             }
+            
+            // Segunda etapa: capturar telefone e enviar
             if (!telefone) {
                 alert('Por favor, informe seu WhatsApp (com DDD).');
                 return;
             }
 
-            // Envia evento Lead para Meta Pixel
+            // Envia evento Lead para Meta Pixel (categoria neutra)
             if (typeof fbq !== 'undefined') {
                 fbq('track', 'Lead', {
                     content_name: capturaProduto,
-                    content_category: 'degustacao_gratuita',
+                    content_category: 'contato_whatsapp',
                     value: 0,
                     currency: 'BRL'
                 });
@@ -2114,7 +2123,7 @@
                 origem: 'captura_modal',
                 tipo_acao: 'whatsapp_degustacao',
                 produto: capturaProduto,
-                secao: 'modal_captura',
+                secao: capturaSecao || 'modal_captura',
                 timestamp: new Date().toISOString()
             });
 
@@ -2123,15 +2132,15 @@
             if (sucesso) sucesso.style.display = 'block';
 
             // Desabilita botões para evitar reenvio
-            const submitBtn = document.querySelector('.modal-btn-submit');
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Recebido ✅';
+            if (btnContinuar) {
+                btnContinuar.disabled = true;
+                btnContinuar.textContent = 'Recebido ✅';
             }
         }
 
-        // Event listener para Enter no input
+        // Event listeners e renderização inicial
         document.addEventListener('DOMContentLoaded', function() {
+            // Enter para avançar no nome
             const inputCaptura = document.getElementById('nomeCaptura');
             if (inputCaptura) {
                 inputCaptura.addEventListener('keypress', function(e) {
@@ -2140,10 +2149,20 @@
                     }
                 });
             }
-            
+
+            // Enter para enviar com telefone
+            const inputTelefone = document.getElementById('telefoneCaptura');
+            if (inputTelefone) {
+                inputTelefone.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        enviarCaptura();
+                    }
+                });
+            }
+
             // Renderizar marquees
             renderizarMarquees();
-            
+
             // Renderizar outros produtos
             const gridOutros = document.getElementById('productsGridOutros');
             if (gridOutros) {
@@ -2277,52 +2296,52 @@
         const produtosQueijosCatarinense = [
             {
                 nome: 'Queijo Colonial Pacheco Zero Lactose',
-                copy: 'Sem lactose, COM SABOR! Perfeito para intolerantes. PROVE GRÁTIS!',
+                copy: 'Sem lactose, COM SABOR! Perfeito para intolerantes.',
                 imagem: 'produtos site 2/Queijos Artesanais Catarinense/Queijo Colonial Pacheco Zero Lactose – Da Fazenda Laticínio Cizeski.jpg'
             },
             {
                 nome: 'Queijo Colonial Pacheco com Chimichurri',
-                copy: 'Explosão de sabor! Nosso colonial com toque especial. Experimente GRÁTIS!',
+                copy: 'Explosão de sabor! Nosso colonial com toque especial.',
                 imagem: 'produtos site 2/Queijos Artesanais Catarinense/Queijo Colonial Pacheco com Chimichurri – Da Fazenda Laticínio Cizeski.jpg'
             },
             {
                 nome: 'Queijo Colonial Pacheco com Orégano',
-                copy: 'Aromático e delicioso! Combinação perfeita. Degustação GRATUITA!',
+                copy: 'Aromático e delicioso! Combinação perfeita.',
                 imagem: 'produtos site 2/Queijos Artesanais Catarinense/Queijo Colonial Pacheco com Orégano – Da Fazenda Laticínio Cizeski.jpg'
             },
             {
                 nome: 'Queijo Bethmale',
-                copy: 'Francês feito em SC! Sabor autêntico e tradicional. PROVE!',
+                copy: 'Francês feito em SC! Sabor autêntico e tradicional.',
                 imagem: 'produtos site 2/Queijos Artesanais Catarinense/Queijo Bethmale – Queijo com Sotaque.png'
             },
             {
                 nome: 'Queijo Colonial Estrela do Campo',
-                copy: 'Estrela da nossa seleção! Colonial autêntico catarinense. Experimente GRÁTIS!',
+                copy: 'Estrela da nossa seleção! Colonial autêntico catarinense.',
                 imagem: 'produtos site 2/Queijos Artesanais Catarinense/Queijo Colonial Estrela do Campo – Wagner Laticínios.png'
             },
             {
                 nome: 'Queijo Comté',
-                copy: 'Suíço com sotaque brasileiro! Maturado e refinado. Degustação GRÁTIS!',
+                copy: 'Suíço com sotaque brasileiro! Maturado e refinado.',
                 imagem: 'produtos site 2/Queijos Artesanais Catarinense/Queijo Comté – Queijo com Sotaque.jpg'
             },
             {
                 nome: 'Queijo Gruyère',
-                copy: 'Clássico suíço feito em SC! Derrete perfeitamente. PROVE GRÁTIS!',
+                copy: 'Clássico suíço feito em SC! Derrete perfeitamente.',
                 imagem: 'produtos site 2/Queijos Artesanais Catarinense/Queijo Gruyère – Queijo com Sotaque.png'
             },
             {
                 nome: 'Queijo Morbier',
-                copy: 'Inconfundível linha preta! Cremoso e saboroso. Experimente GRÁTIS!',
+                copy: 'Inconfundível linha preta! Cremoso e saboroso.',
                 imagem: 'produtos site 2/Queijos Artesanais Catarinense/Queijo Morbier – Queijo com Sotaque.png'
             },
             {
                 nome: 'Queijo Prato Fatiado DaRolt',
-                copy: 'Fatiado na hora! Fresquinho e macio. Degustação GRATUITA!',
+                copy: 'Fatiado na hora! Fresquinho e macio.',
                 imagem: 'produtos site 2/Queijos Artesanais Catarinense/Queijo Prato fatiado – Laticínios DaRolt.jpg'
             },
             {
                 nome: 'Queijo Serrano Fatiado',
-                copy: 'Tradição da serra! Sabor intenso e marcante. PROVE GRÁTIS!',
+                copy: 'Tradição da serra! Sabor intenso e marcante.',
                 imagem: 'produtos site 2/Queijos Artesanais Catarinense/Queijo Serrano fatiado.jpg'
             },
             {
@@ -2340,57 +2359,57 @@
             },
             {
                 nome: 'Parmesão La Paulina',
-                copy: 'Tradição uruguaia! Sabor autêntico e intenso. Degustação GRÁTIS!',
+                copy: 'Tradição uruguaia! Sabor autêntico e intenso.',
                 imagem: 'produtos site 2/Queijos Importados/Parmesão La Paulina.jpg'
             },
             {
                 nome: 'Parmesão Argentino Capa Azul',
-                copy: 'Argentina premium! Curado e saboroso. Experimente GRÁTIS!',
+                copy: 'Argentina premium! Curado e saboroso.',
                 imagem: 'produtos site 2/Queijos Importados/Parmesão argentino Capa Azu.jpg'
             },
             {
                 nome: 'Queijo Belprado Vermelho',
-                copy: 'Holandês original! Suave e cremoso. PROVE GRÁTIS!',
+                copy: 'Holandês original! Suave e cremoso.',
                 imagem: 'produtos site 2/Queijos Importados/Queijo Belprado Vermelho.png'
             },
             {
                 nome: 'Parmesão Arroyo',
-                copy: 'Uruguaio top! Ralado ou em lascas. Degustação GRATUITA!',
+                copy: 'Uruguaio top! Ralado ou em lascas.',
                 imagem: 'produtos site 2/Queijos Importados/Queijo Parmesão Arroyo.jpg'
             },
             {
                 nome: 'Parmesão Capa Preta',
-                copy: 'Maturação especial! Sabor inconfundível. Experimente GRÁTIS!',
+                copy: 'Maturação especial! Sabor inconfundível.',
                 imagem: 'produtos site 2/Queijos Importados/Queijo Parmesão Capa Preta.jpg'
             },
             {
                 nome: 'Parmesão Melincue',
-                copy: 'Argentino autêntico! Para os apaixonados por parmesão. PROVE!',
+                copy: 'Argentino autêntico! Para os apaixonados por parmesão.',
                 imagem: 'produtos site 2/Queijos Importados/Queijo Parmesão – Melincue.png'
             },
             {
                 nome: 'Queijo Prima Donna Vermelho',
-                copy: 'Holandês premium! Rico e complexo. Degustação GRÁTIS!',
+                copy: 'Holandês premium! Rico e complexo.',
                 imagem: 'produtos site 2/Queijos Importados/Queijo Prima Donna Vermelho.jpg'
             },
             {
                 nome: 'Queijo de Cabra Maturado Cablanca',
-                copy: 'Sabor único de cabra! Maturado com perfeição. PROVE GRÁTIS!',
+                copy: 'Sabor único de cabra! Maturado com perfeição.',
                 imagem: 'produtos site 2/Queijos Importados/Queijo de Cabra Maturado Cablanca – Kroon Início : Queijos Importados : Queijo de Cabra .jpg'
             },
             {
                 nome: 'Queijo de Cabra Vonk',
-                copy: 'Holandês de cabra! Leve e saboroso. Experimente GRÁTIS!',
+                copy: 'Holandês de cabra! Leve e saboroso.',
                 imagem: 'produtos site 2/Queijos Importados/Queijo de Cabra – Vonk.jpg'
             },
             {
                 nome: 'Queijo de Ovelha Curado',
-                copy: 'Espanhol autêntico! Intenso e marcante. Degustação GRÁTIS!',
+                copy: 'Espanhol autêntico! Intenso e marcante.',
                 imagem: 'produtos site 2/Queijos Importados/Queijo de Ovelha Curado – El Maestro.jpg'
             },
             {
                 nome: 'Queijo de Ovelha Macio',
-                copy: 'Espanhol cremoso! Delicado e suave. PROVE GRÁTIS!',
+                copy: 'Espanhol cremoso! Delicado e suave.',
                 imagem: 'produtos site 2/Queijos Importados/Queijo de Ovelha Macio – El Maestro.jpg'
             }
         ];
@@ -2398,247 +2417,80 @@
         const produtosQueijosNacionais = [
             {
                 nome: 'Mozzarella de Búfala Bom Destino',
-                copy: 'Fresca e cremosa! Búfala autêntica fatiada na hora. PROVE GRÁTIS!',
+                copy: 'Fresca e cremosa! Búfala autêntica fatiada na hora.',
                 imagem: 'produtos site 2/queijos nacionais/Mozzarella de Búfala fatiada – Laticínios Bom Destino.png'
             },
             {
                 nome: 'Mozzarella de Búfala Levitare',
-                copy: 'Premium e deliciosa! Búfala de primeira. Experimente GRÁTIS!',
+                copy: 'Premium e deliciosa! Búfala de primeira.',
                 imagem: 'produtos site 2/queijos nacionais/Mozzarella de Búfala fatiada – Levitare.png'
             },
             {
                 nome: 'Queijo Canastra',
-                copy: 'Mineiro raiz! Tradição que você prova. Degustação GRATUITA!',
+                copy: 'Mineiro raiz! Tradição que você prova.',
                 imagem: 'produtos site 2/queijos nacionais/Queijo Canastra .jpg'
             },
             {
                 nome: 'Queijo Colonial Premiato 1kg',
-                copy: 'Colonial premiado! Sabor que conquista. PROVE GRÁTIS!',
+                copy: 'Colonial premiado! Sabor que conquista.',
                 imagem: 'produtos site 2/queijos nacionais/Queijo Colonial 1kg – Queijaria Premiato.jpg'
             },
             {
                 nome: 'Queijo Colonial Fresco Premiato 3kg',
-                copy: 'Fresquinho e grande! Ideal para a família. Experimente GRÁTIS!',
+                copy: 'Fresquinho e grande! Ideal para a família.',
                 imagem: 'produtos site 2/queijos nacionais/Queijo Colonial Fresco 3kg – Queijaria Premiato.png'
             },
             {
                 nome: 'Queijo Gorgonzola',
-                copy: 'Azul brasileiro! Cremoso e intenso. Degustação GRÁTIS!',
+                copy: 'Azul brasileiro! Cremoso e intenso.',
                 imagem: 'produtos site 2/queijos nacionais/Queijo Gorgonzola.jpg'
             },
             {
                 nome: 'Queijo Gouda Quatá',
-                copy: 'Brasileiro tipo holandês! Macio e saboroso. PROVE GRÁTIS!',
+                copy: 'Brasileiro tipo holandês! Macio e saboroso.',
                 imagem: 'produtos site 2/queijos nacionais/Queijo Gouda – Quatá Alimentos.jpg'
             },
             {
                 nome: 'Grana Padano Italiano DOP',
-                copy: 'Italiano AUTÊNTICO! Certificado DOP. Experimente GRÁTIS!',
+                copy: 'Italiano AUTÊNTICO! Certificado DOP.',
                 imagem: 'produtos site 2/queijos nacionais/Queijo Grana Padano Italiano Dop.jpg'
             },
             {
                 nome: 'Queijo Mussarela Premiato',
-                copy: 'Mussarela de verdade! Fatiada fresquinha. Degustação GRÁTIS!',
+                copy: 'Mussarela de verdade! Fatiada fresquinha.',
                 imagem: 'produtos site 2/queijos nacionais/Queijo Mussarela – Queijaria Premiato.jpg'
             }
         ];
 
         const produtosFrios = [
-            {
-                nome: 'Copa Colonial Defumada Knabben',
-                copy: 'Defumada artesanalmente! Sabor marcante e único. PROVE GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Copa_Colonial_Defumada_fatiada_Frigorífico_Knabben.png'
-            },
-            {
-                nome: 'Copa Majestade',
-                copy: 'Nome que diz tudo! Premium e saborosa. Degustação GRATUITA!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Copa_Majestade.png'
-            },
-            {
-                nome: 'Copa Maturada Knabben',
-                copy: 'Maturação perfeita! Fatiada na hora. Experimente GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Copa_Maturada_fatiada_Frigorífico_Knabben.png'
-            },
-            {
-                nome: 'Copa Pamplona Fatiada',
-                copy: 'Espanhola autêntica! Textura e sabor incomparáveis. PROVE!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Copa_Pamplona_Fatiada.png'
-            },
-            {
-                nome: 'Linguiça Italiana Xaxim',
-                copy: 'Artesanal de Xaxim! Temperada na medida. Degustação GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Linguiça_Italiana_Xaxim_fatiada_Casa_do_Salame.jpg'
-            },
-            {
-                nome: 'Linguiça de Carne Suína Majestade',
-                copy: 'Pura carne suína! Sabor intenso. Experimente GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Linguiça_de_Carne_Suína_fatiada_Majestade.png'
-            },
-            {
-                nome: 'Lombo Cozido Ervas Finas Ceratti',
-                copy: 'Aromático e suculento! Perfeito para sanduíches. PROVE GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Lombo_Cozido_com_Ervas_Finas_ou_Condimentado_Ceratti.png'
-            },
-            {
-                nome: 'Lombo Curado Majestade',
-                copy: 'Curado com perfeição! Fatiado fininho. Degustação GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Lombo_Curado_Majestade.png'
-            },
-            {
-                nome: 'Lombo Curado Xaxim',
-                copy: 'Tradição artesanal! Sabor que você vai amar. Experimente GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Lombo_Curado_Xaxim_fatiado_Casa_do_Salame.png'
-            },
-            {
-                nome: 'Lombo Defumado Knabben',
-                copy: 'Defumação artesanal! Macio e saboroso. PROVE GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Lombo_Defumado_fatiado_Frigorífico_Knabben.png'
-            },
-            {
-                nome: 'Mortadela Ceratti',
-                copy: 'Mortadela de verdade! Fatiada na espessura ideal. Degustação GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Mortadela_Ceratti.png'
-            },
-            {
-                nome: 'Mortadela Marba',
-                copy: 'Clássica e saborosa! Perfeita para o lanche. Experimente GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Mortadela_Marba.jpg'
-            },
-            {
-                nome: 'Mortadela Ouro Perdigão',
-                copy: 'Premium Perdigão! Qualidade garantida. PROVE GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Mortadela_Ouro_fatiada_Perdigão.jpg'
-            },
-            {
-                nome: 'Pastrami Ceratti',
-                copy: 'Estilo Nova York! Temperado e defumado. Degustação GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Pastrami_Ceratti.png'
-            },
-            {
-                nome: 'Peito de Peru Defumado Sadia',
-                copy: 'Leve e saudável! Defumado suave. Experimente GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Peito_de_Peru_Defumado_Sadia.png'
-            },
-            {
-                nome: 'Picanha Suína Majestade',
-                copy: 'Macia e suculenta! Fatiada na hora. PROVE GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Picanha_Suína_fatiada_Majestade.png'
-            },
-            {
-                nome: 'Presunto Cozido Ceratti',
-                copy: 'Fresquinho e macio! Fatiado do jeito que você quer. Degustação GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto_Cozido_Ceratti.jpg'
-            },
-            {
-                nome: 'Presunto Levíssimo Seara',
-                copy: 'Extra magro! Sabor leve e saudável. Experimente GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto_Cozido_Levíssimo_Seara.jpg'
-            },
-            {
-                nome: 'Presunto Cozido Perdigão',
-                copy: 'Clássico de qualidade! Sempre fresco. PROVE GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto_Cozido_Perdigão.png'
-            },
-            {
-                nome: 'Presunto Cozido Sadia',
-                copy: 'Tradicional Sadia! Fatiado na hora. Degustação GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto_Cozido_Sadia.jpg'
-            },
-            {
-                nome: 'Presunto Cru Italiano',
-                copy: 'Autêntico prosciutto! Fatiado fininho. Experimente GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto_Cru_Italiano.jpg'
-            },
-            {
-                nome: 'Presunto Royale Sadia',
-                copy: 'Premium Sadia! Qualidade superior. PROVE GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto_Royale_Sadia.jpg'
-            },
-            {
-                nome: 'Presunto Serrano Jamón',
-                copy: 'Espanhol autêntico! Curado e delicioso. Degustação GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto_Serrano_Espanhol_Jamon.jpg'
-            },
-            {
-                nome: 'Salame Antônio Carlos',
-                copy: 'Artesanal catarinense! Tradição de família. Experimente GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salame_Frigorífico_Antônio_Carlos.png'
-            },
-            {
-                nome: 'Salame Hamburguês Ceratti',
-                copy: 'Tipo alemão! Temperado com especiarias. PROVE GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salame_Hamburguês_fatiado_Ceratti.png'
-            },
-            {
-                nome: 'Salame Italiano Majestade',
-                copy: 'Italiano autêntico! Sabor marcante. Degustação GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salame_Italiano_fatiado_Majestade.png'
-            },
-            {
-                nome: 'Salame Sananduva Majestade',
-                copy: 'Artesanal gaúcho! Tradicional e saboroso. Experimente GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salame_Sananduva_fatiado_Majestade.png'
-            },
-            {
-                nome: 'Salame Xaxim Light',
-                copy: 'Menos gordura, MUITO sabor! Perfeito para dieta. PROVE GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salame_Xaxim_Light_fatiado_Casa_do_Salame.jpg'
-            },
-            {
-                nome: 'Salame de Lombo Apimentado',
-                copy: 'Com pimenta! Para quem gosta de picante. Degustação GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salame_de_Lombo_Apimentado_fatiado_Frigorífico_Knabben.jpg'
-            },
-            {
-                nome: 'Salame de Metro Knabben',
-                copy: 'O famoso de metro! Compre pelo tamanho que quiser. PROVE!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salame_de_Lombo_Salame_de_Metro_fatiado_Frigorífico_Knabben.jpg'
-            },
-            {
-                nome: 'Salame de Pernil Knabben',
-                copy: 'Menos gorduroso! Sabor intenso. Experimente GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salame_de_Pernil_fatiado_Frigorífico_Knabben.png'
-            },
-            {
-                nome: 'Salame Ceratti',
-                copy: 'Clássico Ceratti! Qualidade comprovada. Degustação GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salame_fatiado_Ceratti.png'
-            },
-            {
-                nome: 'Salame Jane Alimentos',
-                copy: 'Artesanal de SC! Sabor único. PROVE GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salame_fatiado_Jane_Alimentos.png'
-            },
-            {
-                nome: 'Salame Hamburguês Sadia',
-                copy: 'Tipo alemão Sadia! Temperado na medida. Experimente GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salame_tipo_Hamburguês_Sadia.png'
-            },
-            {
-                nome: 'Salame Hamburguês Pamplona',
-                copy: 'Especiarias selecionadas! Sabor incomparável. Degustação GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salame_tipo_Hamburguês_fatiado_Pamplona.png'
-            },
-            {
-                nome: 'Salame Milano Majestade',
-                copy: 'Estilo Milano! Fino e delicado. PROVE GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salame_tipo_Milano_fatiado_Majestade.png'
-            },
-            {
-                nome: 'Salaminho Ceratti',
-                copy: 'Pequeno e saboroso! Perfeito para aperitivo. Experimente GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salaminho_fatiado_Ceratti.png'
-            },
-            {
-                nome: 'Salaminho Majestade',
-                copy: 'Compacto e delicioso! Para todas as ocasiões. Degustação GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salaminho_fatiado_Majestade.jpg'
-            },
-            {
-                nome: 'Salsichão com Picles Ceratti',
-                copy: 'Com picles dentro! Surpreendente e saboroso. PROVE GRÁTIS!',
-                imagem: 'produtos site 2/Frios Fatiados na Hora/Salsichão_com_Picles_Ceratti.png'
-            }
+            { nome: 'Copa Maturada – Knabben', copy: 'Maturação no ponto. Fatiada na hora, sabor intenso.', imagem: 'produtos site 2/Frios Fatiados na Hora/Copa Maturada fatiada – Frigorífico Knabben.png' },
+            { nome: 'Copa – Majestade', copy: 'Textura perfeita e sabor marcante. Fatiada fininha.', imagem: 'produtos site 2/Frios Fatiados na Hora/Copa fatiada – Majestade.png' },
+            { nome: 'Copa – Pamplona', copy: 'Tradição e qualidade. Ideal para tábuas e lanches.', imagem: 'produtos site 2/Frios Fatiados na Hora/Copa fatiada – Pamplona.jpg' },
+            { nome: 'Linguiça Italiana – Xaxim', copy: 'Receita artesanal catarinense. Temperada na medida.', imagem: 'produtos site 2/Frios Fatiados na Hora/Linguiça Italiana Xaxim fatiada – Casa do Salame.png' },
+            { nome: 'Linguiça Suína – Majestade', copy: 'Sabor autêntico e equilibrado. Perfeita para sanduíches.', imagem: 'produtos site 2/Frios Fatiados na Hora/Linguiça de Carne Suína fatiada – Majestade.png' },
+            { nome: 'Lombo Cozido – Ceratti', copy: 'Ervas finas ou condimentado. Macio e aromático.', imagem: 'produtos site 2/Frios Fatiados na Hora/Lombo Cozido com Ervas Finas ou Condimentado – Ceratti.png' },
+            { nome: 'Lombo Curado – Majestade', copy: 'Curado com excelência. Fatiado na espessura ideal.', imagem: 'produtos site 2/Frios Fatiados na Hora/Lombo Curado fatiado – Majestade.png' },
+            { nome: 'Lombo Curado – Xaxim', copy: 'Tradição de Xaxim. Sabor característico e equilibrado.', imagem: 'produtos site 2/Frios Fatiados na Hora/Lombo Curado Xaxim fatiado – Casa do Salame.png' },
+            { nome: 'Lombo Defumado – Knabben', copy: 'Defumação artesanal lenta. Maciez e sabor.', imagem: 'produtos site 2/Frios Fatiados na Hora/Lombo Defumado fatiado – Frigorífico Knabben.jpg' },
+            { nome: 'Mortadela – Marba', copy: 'Clássica e saborosa. Fatiada fresquinha.', imagem: 'produtos site 2/Frios Fatiados na Hora/Mortadela Marba.jpg' },
+            { nome: 'Mortadela Ouro – Perdigão', copy: 'Premium e macia. Perfeita para o dia a dia.', imagem: 'produtos site 2/Frios Fatiados na Hora/Mortadela Ouro fatiada – Perdigão.jpg' },
+            { nome: 'Mortadela – Ceratti', copy: 'Qualidade Ceratti. Textura e sabor superiores.', imagem: 'produtos site 2/Frios Fatiados na Hora/Mortadela – Ceratti.jpg' },
+            { nome: 'Pastrami – Ceratti', copy: 'Temperado e defumado. Estilo Nova York.', imagem: 'produtos site 2/Frios Fatiados na Hora/Pastrami – Ceratti.png' },
+            { nome: 'Peito de Peru – Sadia', copy: 'Defumado suave, leve e saboroso.', imagem: 'produtos site 2/Frios Fatiados na Hora/Peito de Peru Defumado – Sadia.jpg' },
+            { nome: 'Picanha Suína – Majestade', copy: 'Macia e suculenta. Ideal para porções e lanches.', imagem: 'produtos site 2/Frios Fatiados na Hora/Picanha Suína fatiada – Majestade.png' },
+            { nome: 'Presunto Cozido – Ceratti', copy: 'Frescor e maciez. Fatiado do jeito que você prefere.', imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto Cozido – Ceratti.jpg' },
+            { nome: 'Presunto Levíssimo – Seara', copy: 'Mais leve, muito sabor. Para quem busca equilíbrio.', imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto Cozido (Levíssimo) – Seara.jpg' },
+            { nome: 'Presunto Cozido – Perdigão', copy: 'Clássico do dia a dia. Sempre no ponto.', imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto Cozido – Perdigão.jpg' },
+            { nome: 'Presunto Cozido – Sadia', copy: 'Tradição Sadia. Versátil e saboroso.', imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto-Cozido-Sadia.jpg' },
+            { nome: 'Presunto Cru Italiano', copy: 'Prosciutto autêntico. Fatiado fininho.', imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto Cru Italiano.jpg' },
+            { nome: 'Presunto Royale – Sadia', copy: 'Premium e equilibrado. Ótimo para tábuas.', imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto Royale – Sadia.png' },
+            { nome: 'Presunto Serrano – Jamón', copy: 'Espanhol curado. Sabor sofisticado.', imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto Serrano Espanhol – Jamon.jpg' },
+            { nome: 'Salame de Lombo – Metro', copy: 'O famoso de metro. Escolha o tamanho ideal.', imagem: 'produtos site 2/Frios Fatiados na Hora/Salame de Lombo (Salame de Metro) fatiado – Frigorífico Knabben.png' },
+            { nome: 'Salame de Lombo Apimentado', copy: 'Toque picante. Marcante e delicioso.', imagem: 'produtos site 2/Frios Fatiados na Hora/Salame de Lombo Apimentado fatiado – Frigorífico Knabben.png' },
+            { nome: 'Salame de Pernil – Knabben', copy: 'Menos gordura, mais sabor. Excelente rendimento.', imagem: 'produtos site 2/Frios Fatiados na Hora/Salame de Pernil fatiado – Frigorífico Knabben.png' },
+            { nome: 'Salame – Ceratti', copy: 'Qualidade Ceratti. Textura e tempero no ponto.', imagem: 'produtos site 2/Frios Fatiados na Hora/Salame fatiado – Ceratti.png' },
+            { nome: 'Salame – Antônio Carlos', copy: 'Artesanal catarinense. Tradição de família.', imagem: 'produtos site 2/Frios Fatiados na Hora/Salame – Frigorífico Antônio Carlos.jpg' },
+            { nome: 'Salsichão com Picles – Ceratti', copy: 'Surpreendente e saboroso. Picles no recheio.', imagem: 'produtos site 2/Frios Fatiados na Hora/Salsichão com Picles – Ceratti.png' }
         ];
 
         // OUTROS PRODUTOS (Conservas, Ovos, Vinhos, Cachaças)
@@ -2735,6 +2587,33 @@
                 fecharModal('modalLojas');
             }
         }
+    </script>
+
+    <!-- Meta Pixel Code - Carregamento diferido -->
+    <script defer>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1914948786073743');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1914948786073743&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Microsoft Clarity - Carregamento diferido -->
+    <script defer>
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ubo9iaiokv");
     </script>
 </body>
 </html>
