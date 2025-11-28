@@ -449,6 +449,7 @@
         /* ===== MARQUEE STYLES ===== */
         .marquee-category {
             margin-bottom: 35px;
+            position: relative;
         }
 
         .marquee-header {
@@ -481,6 +482,7 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.08);
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
         }
 
         .marquee-wrapper::-webkit-scrollbar {
@@ -503,7 +505,7 @@
 
         .marquee-nav-btn {
             position: absolute;
-            top: 50%;
+            top: calc(50% + 50px);
             transform: translateY(-50%);
             background: linear-gradient(135deg, #FF6B35 0%, #FF4500 100%);
             color: white;
@@ -515,16 +517,21 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 10;
+            z-index: 100;
             font-size: 1.5rem;
             box-shadow: 0 4px 15px rgba(255,107,53,0.6);
             transition: all 0.3s ease;
+            pointer-events: auto;
         }
 
         .marquee-nav-btn:hover {
             background: linear-gradient(135deg, #FF4500 0%, #FF1744 100%);
             transform: translateY(-50%) scale(1.15);
             box-shadow: 0 6px 20px rgba(255,107,53,0.8);
+        }
+
+        .marquee-nav-btn:active {
+            transform: translateY(-50%) scale(0.95);
         }
 
         .marquee-nav-left {
@@ -537,20 +544,8 @@
 
         .marquee-container {
             display: flex;
-            animation: scroll 50s linear infinite;
-        }
-
-        .marquee-container:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
+            gap: 0;
+            padding: 0 10px;
         }
 
         .marquee-item {
@@ -568,6 +563,14 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.12);
             border: 2px solid transparent;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .marquee-item img {
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
         }
 
         .marquee-item:hover {
@@ -1227,6 +1230,7 @@
 
             .marquee-wrapper {
                 padding: 10px 0;
+                touch-action: pan-x;
             }
 
             .marquee-nav-btn {
@@ -1234,6 +1238,12 @@
                 height: 48px;
                 font-size: 1.6rem;
                 box-shadow: 0 6px 20px rgba(124,77,255,0.4);
+                pointer-events: auto;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .marquee-nav-btn:active {
+                transform: translateY(-50%) scale(0.9);
             }
 
             .marquee-nav-left {
@@ -1582,9 +1592,9 @@
                 <h3 class="marquee-category-title">🧀 Queijos Artesanais Exclusivos</h3>
                 <p class="marquee-category-description">Queijos artesanais premiados que você NÃO encontra em supermercados. Experimente a diferença!</p>
             </div>
+            <button class="marquee-nav-btn marquee-nav-left" onclick="scrollMarquee('marqueeQueijosArtesanais', -1)" aria-label="Anterior">‹</button>
+            <button class="marquee-nav-btn marquee-nav-right" onclick="scrollMarquee('marqueeQueijosArtesanais', 1)" aria-label="Próximo">›</button>
             <div class="marquee-wrapper">
-                <button class="marquee-nav-btn marquee-nav-left" onclick="scrollMarquee('marqueeQueijosArtesanais', -1)" aria-label="Anterior">‹</button>
-                <button class="marquee-nav-btn marquee-nav-right" onclick="scrollMarquee('marqueeQueijosArtesanais', 1)" aria-label="Próximo">›</button>
                 <div class="marquee-container" id="marqueeQueijosArtesanais">
                     <!-- Produtos serão inseridos aqui via JS -->
                 </div>
@@ -1602,9 +1612,9 @@
                 <h3 class="marquee-category-title">🏔️ Queijos Artesanais de Santa Catarina</h3>
                 <p class="marquee-category-description">Queijos da terra! Tradição catarinense com sabor incomparável. Conheça a diferença!</p>
             </div>
+            <button class="marquee-nav-btn marquee-nav-left" onclick="scrollMarquee('marqueeQueijosCatarinense', -1)" aria-label="Anterior">‹</button>
+            <button class="marquee-nav-btn marquee-nav-right" onclick="scrollMarquee('marqueeQueijosCatarinense', 1)" aria-label="Próximo">›</button>
             <div class="marquee-wrapper">
-                <button class="marquee-nav-btn marquee-nav-left" onclick="scrollMarquee('marqueeQueijosCatarinense', -1)" aria-label="Anterior">‹</button>
-                <button class="marquee-nav-btn marquee-nav-right" onclick="scrollMarquee('marqueeQueijosCatarinense', 1)" aria-label="Próximo">›</button>
                 <div class="marquee-container" id="marqueeQueijosCatarinense">
                     <!-- Produtos serão inseridos aqui via JS -->
                 </div>
@@ -1622,9 +1632,9 @@
                 <h3 class="marquee-category-title">🌍 Queijos Importados Premium</h3>
                 <p class="marquee-category-description">Queijos internacionais selecionados. Sabores do mundo direto na sua mesa!</p>
             </div>
+            <button class="marquee-nav-btn marquee-nav-left" onclick="scrollMarquee('marqueeQueijosImportados', -1)" aria-label="Anterior">‹</button>
+            <button class="marquee-nav-btn marquee-nav-right" onclick="scrollMarquee('marqueeQueijosImportados', 1)" aria-label="Próximo">›</button>
             <div class="marquee-wrapper">
-                <button class="marquee-nav-btn marquee-nav-left" onclick="scrollMarquee('marqueeQueijosImportados', -1)" aria-label="Anterior">‹</button>
-                <button class="marquee-nav-btn marquee-nav-right" onclick="scrollMarquee('marqueeQueijosImportados', 1)" aria-label="Próximo">›</button>
                 <div class="marquee-container" id="marqueeQueijosImportados">
                     <!-- Produtos serão inseridos aqui via JS -->
                 </div>
@@ -1642,9 +1652,9 @@
                 <h3 class="marquee-category-title">🇧🇷 Queijos Nacionais Premium</h3>
                 <p class="marquee-category-description">O melhor do Brasil! Queijos artesanais e industriais de primeira qualidade.</p>
             </div>
+            <button class="marquee-nav-btn marquee-nav-left" onclick="scrollMarquee('marqueeQueijosNacionais', -1)" aria-label="Anterior">‹</button>
+            <button class="marquee-nav-btn marquee-nav-right" onclick="scrollMarquee('marqueeQueijosNacionais', 1)" aria-label="Próximo">›</button>
             <div class="marquee-wrapper">
-                <button class="marquee-nav-btn marquee-nav-left" onclick="scrollMarquee('marqueeQueijosNacionais', -1)" aria-label="Anterior">‹</button>
-                <button class="marquee-nav-btn marquee-nav-right" onclick="scrollMarquee('marqueeQueijosNacionais', 1)" aria-label="Próximo">›</button>
                 <div class="marquee-container" id="marqueeQueijosNacionais">
                     <!-- Produtos serão inseridos aqui via JS -->
                 </div>
@@ -1662,9 +1672,9 @@
                 <h3 class="marquee-category-title">🥓 Frios Fatiados na Hora</h3>
                 <p class="marquee-category-description">Frescor máximo! Salames, presuntos, copas e muito mais. Fatiado do jeito que você prefere!</p>
             </div>
+            <button class="marquee-nav-btn marquee-nav-left" onclick="scrollMarquee('marqueeFrios', -1)" aria-label="Anterior">‹</button>
+            <button class="marquee-nav-btn marquee-nav-right" onclick="scrollMarquee('marqueeFrios', 1)" aria-label="Próximo">›</button>
             <div class="marquee-wrapper">
-                <button class="marquee-nav-btn marquee-nav-left" onclick="scrollMarquee('marqueeFrios', -1)" aria-label="Anterior">‹</button>
-                <button class="marquee-nav-btn marquee-nav-right" onclick="scrollMarquee('marqueeFrios', 1)" aria-label="Próximo">›</button>
                 <div class="marquee-container" id="marqueeFrios">
                     <!-- Produtos serão inseridos aqui via JS -->
                 </div>
@@ -1908,10 +1918,9 @@
     <div id="modalCapturaNome" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="fecharCaptura()">&times;</button>
-            <h3 id="capturaSubtitulo">Vamos Enviar Nossas Localizações e Promoções pelo WhatsApp</h3>
-            <p id="capturaAviso">✅ Preenche nome e telefone que vamos lhe chamar no WhatsApp</p>
-            <input type="text" id="nomeCaptura" placeholder="Seu primeiro nome" aria-label="Digite seu nome" style="display:block;">
-            <input type="tel" id="telefoneCaptura" placeholder="Seu WhatsApp (com DDD)" aria-label="Digite seu telefone" style="display:none;">
+            <h3 id="capturaSubtitulo">📱 Digite seu WhatsApp</h3>
+            <p id="capturaAviso">✅ Vamos lhe chamar no WhatsApp com nossas localizações e promoções</p>
+            <input type="tel" id="telefoneCaptura" placeholder="Seu WhatsApp (com DDD)" aria-label="Digite seu telefone">
             <div id="capturaSucesso" style="display:none; margin-top: 12px; color: #25D366; font-weight: 600;">
                 ✅ Obrigado! Vamos enviar uma mensagem no WhatsApp para você em instantes.
             </div>
@@ -1929,9 +1938,6 @@
     <script>
         // ===== SISTEMA DE TRACKING COM WEBHOOK =====
         const WEBHOOK_URL = 'https://hook.us2.make.com/md8tzkcsr6wxwkz8toctsy2la2ob5s1f';
-        
-        // Variável global para armazenar o nome do lead após captura
-        let nomeLeadCapturado = '';
 
         // Inicialização ao carregar a página
         document.addEventListener('DOMContentLoaded', function() {
@@ -1940,10 +1946,9 @@
         
         async function enviarWebhook(dados) {
             try {
-                // Inclui o nome capturado e identificador da página em todos os webhooks
+                // Inclui identificador da página em todos os webhooks
                 const dadosCompletos = {
                     ...dados,
-                    nome: dados.nome || nomeLeadCapturado || '',
                     fonte: 'LP Degustação Queijos Frios'
                 };
                 
@@ -2008,11 +2013,17 @@
         }
 
         function scrollMarquee(marqueeId, direction) {
-            const container = document.getElementById(marqueeId);
-            const scrollAmount = 400; // pixels para rolar
-            const currentScroll = container.scrollLeft;
+            const marqueeContainer = document.getElementById(marqueeId);
+            if (!marqueeContainer) return;
             
-            container.scrollTo({
+            // Pega o wrapper (pai do marquee-container)
+            const wrapper = marqueeContainer.closest('.marquee-wrapper');
+            if (!wrapper) return;
+            
+            const scrollAmount = 400; // pixels para rolar
+            const currentScroll = wrapper.scrollLeft;
+            
+            wrapper.scrollTo({
                 left: currentScroll + (scrollAmount * direction),
                 behavior: 'smooth'
             });
@@ -2034,28 +2045,14 @@
             capturaProduto = produto;
             capturaSecao = secao;
             
-            // Garante que inicia mostrando campo de nome
-            const nomeInput = document.getElementById('nomeCaptura');
-            const telefoneInput = document.getElementById('telefoneCaptura');
-            nomeInput.style.display = 'block';
-            telefoneInput.style.display = 'none';
-            
             document.getElementById('modalCapturaNome').style.display = 'flex';
-            nomeInput.focus();
+            document.getElementById('telefoneCaptura').focus();
         }
 
         // FECHAR MODAL DE CAPTURA
         function fecharCaptura() {
             document.getElementById('modalCapturaNome').style.display = 'none';
-            const nomeInput = document.getElementById('nomeCaptura');
-            const telefoneInput = document.getElementById('telefoneCaptura');
-            
-            nomeInput.value = '';
-            telefoneInput.value = '';
-            
-            // Reseta para mostrar nome primeiro
-            nomeInput.style.display = 'block';
-            telefoneInput.style.display = 'none';
+            document.getElementById('telefoneCaptura').value = '';
             
             const sucesso = document.getElementById('capturaSucesso');
             if (sucesso) sucesso.style.display = 'none';
@@ -2080,26 +2077,10 @@
 
         // ENVIAR CAPTURA
         function enviarCaptura() {
-            const nomeInput = document.getElementById('nomeCaptura');
             const telefoneInput = document.getElementById('telefoneCaptura');
             const btnContinuar = document.getElementById('btnContinuar');
-            const nome = nomeInput.value.trim();
             const telefone = telefoneInput.value.trim();
             
-            // Primeira etapa: capturar nome
-            if (telefoneInput.style.display === 'none') {
-                if (!nome) {
-                    alert('Por favor, digite seu nome para continuar.');
-                    return;
-                }
-                // Esconde nome e mostra telefone
-                nomeInput.style.display = 'none';
-                telefoneInput.style.display = 'block';
-                telefoneInput.focus();
-                return;
-            }
-            
-            // Segunda etapa: capturar telefone e enviar
             if (!telefone) {
                 alert('Por favor, informe seu WhatsApp (com DDD).');
                 return;
@@ -2115,12 +2096,8 @@
                 });
             }
 
-            // Armazena o nome globalmente para futuras interações
-            nomeLeadCapturado = nome;
-
-            // Envia tracking com nome e telefone
+            // Envia tracking apenas com telefone
             enviarWebhook({
-                nome: nome,
                 telefone: telefone,
                 origem: 'captura_modal',
                 tipo_acao: 'whatsapp_degustacao',
@@ -2142,16 +2119,6 @@
 
         // Event listeners e renderização inicial
         document.addEventListener('DOMContentLoaded', function() {
-            // Enter para avançar no nome
-            const inputCaptura = document.getElementById('nomeCaptura');
-            if (inputCaptura) {
-                inputCaptura.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        enviarCaptura();
-                    }
-                });
-            }
-
             // Enter para enviar com telefone
             const inputTelefone = document.getElementById('telefoneCaptura');
             if (inputTelefone) {
@@ -2472,15 +2439,15 @@
             { nome: 'Linguiça Suína – Majestade', copy: 'Sabor autêntico e equilibrado. Perfeita para sanduíches.', imagem: 'produtos site 2/Frios Fatiados na Hora/Linguiça de Carne Suína fatiada – Majestade.webp' },
             { nome: 'Lombo Cozido – Ceratti', copy: 'Ervas finas ou condimentado. Macio e aromático.', imagem: 'produtos site 2/Frios Fatiados na Hora/Lombo Cozido com Ervas Finas ou Condimentado – Ceratti.webp' },
             { nome: 'Lombo Curado – Majestade', copy: 'Curado com excelência. Fatiado na espessura ideal.', imagem: 'produtos site 2/Frios Fatiados na Hora/Lombo Curado fatiado – Majestade.webp' },
-            { nome: 'Lombo Curado – Xaxim', copy: 'Tradição de Xaxim. Sabor característico e equilibrado.', imagem: 'produtos site 2/Frios Fatiados na Hora/Lombo Curado Xaxim fatiado – Casa do Salame.webp' },
+            { nome: 'Lombo Curado – Xaxim', copy: 'Tradição de Xaxim. Sabor característico e equilibrado.', imagem: 'produtos site 2/Frios Fatiados na Hora/ Lombo Curado Xaxim fatiado – Casa do Salame.webp' },
             { nome: 'Lombo Defumado – Knabben', copy: 'Defumação artesanal lenta. Maciez e sabor.', imagem: 'produtos site 2/Frios Fatiados na Hora/Lombo Defumado fatiado – Frigorífico Knabben.webp' },
             { nome: 'Mortadela – Marba', copy: 'Clássica e saborosa. Fatiada fresquinha.', imagem: 'produtos site 2/Frios Fatiados na Hora/Mortadela Marba.webp' },
             { nome: 'Mortadela Ouro – Perdigão', copy: 'Premium e macia. Perfeita para o dia a dia.', imagem: 'produtos site 2/Frios Fatiados na Hora/Mortadela Ouro fatiada – Perdigão.webp' },
             { nome: 'Mortadela – Ceratti', copy: 'Qualidade Ceratti. Textura e sabor superiores.', imagem: 'produtos site 2/Frios Fatiados na Hora/Mortadela – Ceratti.webp' },
             { nome: 'Pastrami – Ceratti', copy: 'Temperado e defumado. Estilo Nova York.', imagem: 'produtos site 2/Frios Fatiados na Hora/Pastrami – Ceratti.webp' },
             { nome: 'Peito de Peru – Sadia', copy: 'Defumado suave, leve e saboroso.', imagem: 'produtos site 2/Frios Fatiados na Hora/Peito de Peru Defumado – Sadia.webp' },
-            { nome: 'Picanha Suína – Majestade', copy: 'Macia e suculenta. Ideal para porções e lanches.', imagem: 'produtos site 2/Frios Fatiados na Hora/Picanha Suína fatiada – Majestade.webp' },
-            { nome: 'Presunto Cozido – Ceratti', copy: 'Frescor e maciez. Fatiado do jeito que você prefere.', imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto Cozido – Ceratti.webp' },
+            { nome: 'Picanha Suína – Majestade', copy: 'Macia e suculenta. Ideal para porções e lanches.', imagem: 'produtos site 2/Frios Fatiados na Hora/ Picanha Suína fatiada – Majestade.webp' },
+            { nome: 'Presunto Cozido – Ceratti', copy: 'Frescor e maciez. Fatiado do jeito que você prefere.', imagem: 'produtos site 2/Frios Fatiados na Hora/ Presunto Cozido – Ceratti.webp' },
             { nome: 'Presunto Levíssimo – Seara', copy: 'Mais leve, muito sabor. Para quem busca equilíbrio.', imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto Cozido (Levíssimo) – Seara.webp' },
             { nome: 'Presunto Cozido – Perdigão', copy: 'Clássico do dia a dia. Sempre no ponto.', imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto Cozido – Perdigão.webp' },
             { nome: 'Presunto Cozido – Sadia', copy: 'Tradição Sadia. Versátil e saboroso.', imagem: 'produtos site 2/Frios Fatiados na Hora/Presunto-Cozido-Sadia.webp' },
@@ -2580,6 +2547,60 @@
             const marqueeFrios = document.getElementById('marqueeFrios');
             const htmlFrios = produtosFrios.map(criarMarqueeItem).join('');
             marqueeFrios.innerHTML = htmlFrios;
+
+            // Inicializar interação touch para todos os marquee-wrappers
+            initMarqueeTouch();
+        }
+
+        // Função para melhorar a interação touch nos marquees
+        function initMarqueeTouch() {
+            const wrappers = document.querySelectorAll('.marquee-wrapper');
+            
+            wrappers.forEach(wrapper => {
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+
+                // Prevenir que os botões de navegação interfiram no drag
+                const navButtons = wrapper.querySelectorAll('.marquee-nav-btn');
+                navButtons.forEach(btn => {
+                    btn.addEventListener('touchstart', (e) => {
+                        e.stopPropagation();
+                    }, { passive: true });
+                });
+
+                // Mouse events para desktop
+                wrapper.addEventListener('mousedown', (e) => {
+                    // Não ativar drag se clicou em um botão
+                    if (e.target.closest('.marquee-nav-btn')) return;
+                    
+                    isDown = true;
+                    wrapper.style.cursor = 'grabbing';
+                    startX = e.pageX - wrapper.offsetLeft;
+                    scrollLeft = wrapper.scrollLeft;
+                });
+
+                wrapper.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    wrapper.style.cursor = 'grab';
+                });
+
+                wrapper.addEventListener('mouseup', () => {
+                    isDown = false;
+                    wrapper.style.cursor = 'grab';
+                });
+
+                wrapper.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - wrapper.offsetLeft;
+                    const walk = (x - startX) * 2;
+                    wrapper.scrollLeft = scrollLeft - walk;
+                });
+
+                // Adiciona cursor grab no desktop
+                wrapper.style.cursor = 'grab';
+            });
         }
 
         // Fechar modal ao clicar fora
