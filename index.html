@@ -2053,7 +2053,7 @@
                 <div style="text-align: center; margin-bottom: 20px;">
                     <div style="font-size: 3rem; margin-bottom: 10px;">🎉</div>
                     <h3 style="color: #25D366; font-size: 1.8rem; margin-bottom: 10px;">Parabéns!</h3>
-                    <p style="font-size: 1.3rem; font-weight: 700; color: var(--cor-primaria);">Você ganhou <span style="color: #25D366;">20% de DESCONTO</span></p>
+                    <p style="font-size: 1.3rem; font-weight: 700; color: var(--cor-primaria);">Você ganhou <span style="color: #25D366;">10% de DESCONTO</span></p>
                     <p style="font-size: 1rem; color: #666; margin-top: 10px;">Selecione a banca de sua preferência:</p>
                 </div>
                 <div class="bancas-selector">
@@ -2135,7 +2135,7 @@
                     </div>
                     <div style="background: #FFF8DC; padding: 20px; border-radius: 8px; border-left: 4px solid #FFD700; margin-bottom: 20px;">
                         <p style="font-size: 1.1rem; color: #495234; font-weight: 700; margin-bottom: 10px;">
-                            💰 Seu desconto de 20% está garantido!
+                            💰 Seu desconto de 10% está garantido!
                         </p>
                         <p style="font-size: 0.95rem; color: #666; line-height: 1.6;">
                             <strong>⚠️ IMPORTANTE:</strong> O desconto só é válido se você comparecer na banca <strong>na data e horário agendado</strong>. Apresente a mensagem de confirmação do WhatsApp para garantir seu desconto.
@@ -2544,16 +2544,16 @@
                 data_lembrete_1_dia_depois: data_1_dia_depois,
                 data_lembrete_1_dia_antes: data_1_dia_antes,
                 data_lembrete_5_dias_antes: data_5_dias_antes,
-                tipo_acao: 'agendamento_desconto_20',
-                desconto: '20%',
+                tipo_acao: 'agendamento_desconto_10',
+                desconto: '10%',
                 timestamp: new Date().toISOString()
             });
             
             // Envia evento para Meta Pixel
             if (typeof fbq !== 'undefined') {
                 fbq('track', 'Schedule', {
-                    content_name: 'Agendamento 20% Desconto',
-                    value: 20,
+                    content_name: 'Agendamento 10% Desconto',
+                    value: 10,
                     currency: 'BRL'
                 });
             }
