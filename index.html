@@ -1023,6 +1023,38 @@
             transform: translateY(0);
         }
 
+        /* ===== BOTÕES DE SEMANA ===== */
+        .semana-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .semana-btn {
+            flex: 1;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--cor-primaria);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .semana-btn:hover {
+            border-color: var(--cor-primaria);
+            background: #f9f9f9;
+        }
+
+        .semana-btn.active {
+            background: var(--cor-primaria);
+            color: white;
+            border-color: var(--cor-primaria);
+        }
+
         @media (max-width: 500px) {
             .bancas-selector {
                 grid-template-columns: 1fr;
@@ -2082,6 +2114,13 @@
                 <p id="bancaSelecionada" style="text-align: center; font-weight: 600; color: var(--cor-primaria); margin-bottom: 15px;"></p>
                 
                 <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; color: var(--cor-primaria);">📆 Dia:</label>
+                
+                <!-- Seletor de Semana -->
+                <div class="semana-selector">
+                    <button class="semana-btn active" onclick="selecionarSemana('esta')">Esta Semana</button>
+                    <button class="semana-btn" onclick="selecionarSemana('proxima')">Próxima Semana</button>
+                </div>
+                
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px;">
                     <button class="dia-btn" data-dia="0" onclick="selecionarDia(0)">Hoje</button>
                     <button class="dia-btn" data-dia="1" onclick="selecionarDia(1)">Amanhã</button>
@@ -2337,8 +2376,28 @@
             banca: '',
             diaSelecionado: null,
             horarioSelecionado: null,
-            dataCompleta: null
+            dataCompleta: null,
+            semanaOffset: 0 // 0 = esta semana, 7 = próxima semana
         };
+
+        function selecionarSemana(tipo) {
+            // Remove classe active de todos os botões de semana
+            document.querySelectorAll('.semana-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Adiciona classe active no botão clicado
+            event.target.classList.add('active');
+            
+            // Define o offset da semana
+            dadosAgendamento.semanaOffset = tipo === 'esta' ? 0 : 7;
+            
+            // Limpa seleção de dia anterior
+            document.querySelectorAll('.dia-btn').forEach(btn => btn.classList.remove('selected'));
+            dadosAgendamento.diaSelecionado = null;
+            dadosAgendamento.dataCompleta = null;
+            
+            // Atualiza preview
+            atualizarPreviewAgendamento();
+        }
 
         function mostrarPasso(numeroPasso) {
             // Esconde todos os passos
@@ -2384,11 +2443,11 @@
             let dataAlvo = new Date(hoje);
             
             if (diasParaAdicionar === 0) {
-                // Hoje
-                dataAlvo = hoje;
+                // Hoje + offset da semana
+                dataAlvo.setDate(hoje.getDate() + dadosAgendamento.semanaOffset);
             } else if (diasParaAdicionar === 1) {
-                // Amanhã
-                dataAlvo.setDate(hoje.getDate() + 1);
+                // Amanhã + offset da semana
+                dataAlvo.setDate(hoje.getDate() + 1 + dadosAgendamento.semanaOffset);
             } else {
                 // Para dias da semana (segunda a domingo = 2 a 8)
                 // Precisa calcular próximo dia da semana
@@ -2411,7 +2470,8 @@
                     diasParaProximo = 7;
                 }
                 
-                dataAlvo.setDate(hoje.getDate() + diasParaProximo);
+                // Adiciona o offset da semana selecionada
+                dataAlvo.setDate(hoje.getDate() + diasParaProximo + dadosAgendamento.semanaOffset);
             }
             
             dadosAgendamento.diaSelecionado = diasParaAdicionar;
@@ -2575,9 +2635,24 @@
             dadosAgendamento = {
                 telefone: '',
                 banca: '',
-                data: '',
-                horario: ''
+                diaSelecionado: null,
+                horarioSelecionado: null,
+                dataCompleta: null,
+                semanaOffset: 0
             };
+            
+            // Reseta seletor de semana para "Esta Semana"
+            document.querySelectorAll('.semana-btn').forEach(btn => btn.classList.remove('active'));
+            const btnEstaSemana = document.querySelector('.semana-btn');
+            if (btnEstaSemana) btnEstaSemana.classList.add('active');
+            
+            // Limpa seleções de dia e horário
+            document.querySelectorAll('.dia-btn').forEach(btn => btn.classList.remove('selected'));
+            document.querySelectorAll('.horario-btn').forEach(btn => btn.classList.remove('selected'));
+            
+            // Esconde preview
+            const preview = document.getElementById('previewAgendamento');
+            if (preview) preview.style.display = 'none';
             
             capturaAcao = '';
             capturaProduto = '';
