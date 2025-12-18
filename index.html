@@ -938,6 +938,97 @@
             transform: scale(1.05);
         }
 
+        /* ===== PASSOS DO MODAL ===== */
+        .modal-step {
+            display: none;
+        }
+
+        .modal-step.active {
+            display: block;
+            animation: fadeInStep 0.4s ease;
+        }
+
+        @keyframes fadeInStep {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bancas-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .banca-btn {
+            background: linear-gradient(135deg, var(--cor-primaria), #2a301e);
+            color: white;
+            border: 3px solid transparent;
+            border-radius: 12px;
+            padding: 20px 15px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .banca-btn small {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .banca-btn:hover {
+            transform: translateY(-3px);
+            border-color: var(--cor-destaque);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .banca-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ===== BOTÕES DE DIA E HORÁRIO ===== */
+        .dia-btn, .horario-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--cor-primaria);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .dia-btn:hover, .horario-btn:hover {
+            border-color: var(--cor-primaria);
+            background: #f9f9f9;
+            transform: translateY(-2px);
+        }
+
+        .dia-btn.selected, .horario-btn.selected {
+            background: var(--cor-primaria);
+            color: white;
+            border-color: var(--cor-primaria);
+            box-shadow: 0 4px 12px rgba(73, 82, 52, 0.3);
+        }
+
+        .dia-btn:active, .horario-btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 500px) {
+            .bancas-selector {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* ===== MODAL DE LOJAS ===== */
         /* removido modal antigo */
 
@@ -1945,19 +2036,115 @@
     <div id="modalCapturaNome" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="fecharCaptura()">&times;</button>
-            <h3 id="capturaSubtitulo">📱 Digite seu WhatsApp</h3>
-            <p id="capturaAviso">✅ Vamos lhe chamar no WhatsApp com nossas localizações e promoções</p>
-            <input type="tel" id="telefoneCaptura" placeholder="Seu WhatsApp (com DDD)" aria-label="Digite seu telefone">
-            <div id="capturaSucesso" style="display:none; margin-top: 12px; color: #25D366; font-weight: 600;">
-                ✅ Obrigado! Vamos enviar uma mensagem no WhatsApp para você em instantes.
+            
+            <!-- PASSO 1: Telefone -->
+            <div id="passo1" class="modal-step active">
+                <h3>📱 Digite seu WhatsApp</h3>
+                <p>✅ Vamos lhe chamar no WhatsApp com nossas localizações e promoções</p>
+                <input type="tel" id="telefoneCaptura" placeholder="Seu WhatsApp (com DDD)" aria-label="Digite seu telefone">
+                <div class="modal-buttons">
+                    <button class="modal-btn modal-btn-cancel" onclick="fecharCaptura()">Cancelar</button>
+                    <button class="modal-btn modal-btn-submit" onclick="irParaPasso2()">Continuar →</button>
+                </div>
             </div>
-            <div class="modal-buttons">
-                <button class="modal-btn modal-btn-cancel" onclick="fecharCaptura()">
-                    Cancelar
-                </button>
-                <button class="modal-btn modal-btn-submit" onclick="enviarCaptura()" id="btnContinuar">
-                    Continuar →
-                </button>
+
+            <!-- PASSO 2: Desconto + Seleção de Banca -->
+            <div id="passo2" class="modal-step">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">🎉</div>
+                    <h3 style="color: #25D366; font-size: 1.8rem; margin-bottom: 10px;">Parabéns!</h3>
+                    <p style="font-size: 1.3rem; font-weight: 700; color: var(--cor-primaria);">Você ganhou <span style="color: #25D366;">20% de DESCONTO</span></p>
+                    <p style="font-size: 1rem; color: #666; margin-top: 10px;">Selecione a banca de sua preferência:</p>
+                </div>
+                <div class="bancas-selector">
+                    <button class="banca-btn" onclick="selecionarBanca('Beiramar Shopping')">
+                        📍 Beiramar Shopping<br>
+                        <small>Florianópolis - SC</small>
+                    </button>
+                    <button class="banca-btn" onclick="selecionarBanca('Coqueiros')">
+                        📍 Coqueiros<br>
+                        <small>Florianópolis - SC</small>
+                    </button>
+                    <button class="banca-btn" onclick="selecionarBanca('Campinas')">
+                        📍 Campinas<br>
+                        <small>São José - SC</small>
+                    </button>
+                    <button class="banca-btn" onclick="selecionarBanca('Santa Mônica')">
+                        📍 Santa Mônica<br>
+                        <small>Florianópolis - SC</small>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PASSO 3: Agendar Data e Horário -->
+            <div id="passo3" class="modal-step">
+                <h3>📅 Quando você prefere ir?</h3>
+                <p id="bancaSelecionada" style="text-align: center; font-weight: 600; color: var(--cor-primaria); margin-bottom: 15px;"></p>
+                
+                <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; color: var(--cor-primaria);">📆 Dia:</label>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px;">
+                    <button class="dia-btn" data-dia="0" onclick="selecionarDia(0)">Hoje</button>
+                    <button class="dia-btn" data-dia="1" onclick="selecionarDia(1)">Amanhã</button>
+                    <button class="dia-btn" data-dia="2" onclick="selecionarDia(2)">Seg</button>
+                    <button class="dia-btn" data-dia="3" onclick="selecionarDia(3)">Ter</button>
+                    <button class="dia-btn" data-dia="4" onclick="selecionarDia(4)">Qua</button>
+                    <button class="dia-btn" data-dia="5" onclick="selecionarDia(5)">Qui</button>
+                    <button class="dia-btn" data-dia="6" onclick="selecionarDia(6)">Sex</button>
+                    <button class="dia-btn" data-dia="7" onclick="selecionarDia(7)">Sáb</button>
+                    <button class="dia-btn" data-dia="8" onclick="selecionarDia(8)">Dom</button>
+                </div>
+                
+                <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; color: var(--cor-primaria);">🕐 Horário:</label>
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 15px;">
+                    <button class="horario-btn" data-horario="09:00" onclick="selecionarHorario('09:00')">09h</button>
+                    <button class="horario-btn" data-horario="10:00" onclick="selecionarHorario('10:00')">10h</button>
+                    <button class="horario-btn" data-horario="11:00" onclick="selecionarHorario('11:00')">11h</button>
+                    <button class="horario-btn" data-horario="12:00" onclick="selecionarHorario('12:00')">12h</button>
+                    <button class="horario-btn" data-horario="13:00" onclick="selecionarHorario('13:00')">13h</button>
+                    <button class="horario-btn" data-horario="14:00" onclick="selecionarHorario('14:00')">14h</button>
+                    <button class="horario-btn" data-horario="15:00" onclick="selecionarHorario('15:00')">15h</button>
+                    <button class="horario-btn" data-horario="16:00" onclick="selecionarHorario('16:00')">16h</button>
+                    <button class="horario-btn" data-horario="17:00" onclick="selecionarHorario('17:00')">17h</button>
+                    <button class="horario-btn" data-horario="18:00" onclick="selecionarHorario('18:00')">18h</button>
+                </div>
+
+                <!-- Preview da seleção -->
+                <div id="previewAgendamento" style="display: none; text-align: center; padding: 15px; background: #f0f8f0; border-radius: 10px; margin-bottom: 20px; border: 2px solid #25D366;">
+                    <p style="margin: 0; font-weight: 700; color: #25D366; font-size: 1.05rem;">✅ Agendamento:</p>
+                    <p id="previewTexto" style="margin: 8px 0 0 0; font-weight: 600; color: var(--cor-primaria); font-size: 1rem;"></p>
+                </div>
+
+                <div class="modal-buttons">
+                    <button class="modal-btn modal-btn-cancel" onclick="voltarPasso2()">← Voltar</button>
+                    <button class="modal-btn modal-btn-submit" onclick="finalizarAgendamento()">Confirmar →</button>
+                </div>
+            </div>
+
+            <!-- PASSO 4: Confirmação -->
+            <div id="passo4" class="modal-step">
+                <div style="text-align: center;">
+                    <div style="font-size: 4rem; margin-bottom: 20px;">✅</div>
+                    <h3 style="color: #25D366; font-size: 1.8rem; margin-bottom: 15px;">Agendamento Confirmado!</h3>
+                    <p style="font-size: 1.1rem; color: #333; line-height: 1.8; margin-bottom: 20px;">
+                        Obrigado! Vamos enviar uma <strong>mensagem de confirmação no WhatsApp</strong> com todos os detalhes da sua visita.
+                    </p>
+                    <div style="background: #f5f5f5; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+                        <p style="font-size: 0.95rem; color: #666; margin-bottom: 5px;"><strong>Banca:</strong> <span id="resumoBanca"></span></p>
+                        <p style="font-size: 0.95rem; color: #666; margin-bottom: 5px;"><strong>Data:</strong> <span id="resumoData"></span></p>
+                        <p style="font-size: 0.95rem; color: #666;"><strong>Horário:</strong> <span id="resumoHorario"></span></p>
+                    </div>
+                    <div style="background: #FFF8DC; padding: 20px; border-radius: 8px; border-left: 4px solid #FFD700; margin-bottom: 20px;">
+                        <p style="font-size: 1.1rem; color: #495234; font-weight: 700; margin-bottom: 10px;">
+                            💰 Seu desconto de 20% está garantido!
+                        </p>
+                        <p style="font-size: 0.95rem; color: #666; line-height: 1.6;">
+                            <strong>⚠️ IMPORTANTE:</strong> O desconto só é válido se você comparecer na banca <strong>na data e horário agendado</strong>. Apresente a mensagem de confirmação do WhatsApp para garantir seu desconto.
+                        </p>
+                    </div>
+                    <button class="modal-btn modal-btn-submit" onclick="fecharCaptura()" style="width: 100%;">
+                        Entendi!
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -2142,6 +2329,258 @@
                 btnContinuar.disabled = true;
                 btnContinuar.textContent = 'Recebido ✅';
             }
+        }
+
+        // ===== CONTROLE DOS PASSOS DO MODAL =====
+        let dadosAgendamento = {
+            telefone: '',
+            banca: '',
+            diaSelecionado: null,
+            horarioSelecionado: null,
+            dataCompleta: null
+        };
+
+        function mostrarPasso(numeroPasso) {
+            // Esconde todos os passos
+            document.querySelectorAll('.modal-step').forEach(step => {
+                step.classList.remove('active');
+            });
+            // Mostra o passo desejado
+            document.getElementById('passo' + numeroPasso).classList.add('active');
+        }
+
+        function irParaPasso2() {
+            const telefone = document.getElementById('telefoneCaptura').value.trim();
+            
+            if (!telefone) {
+                alert('Por favor, informe seu WhatsApp (com DDD).');
+                return;
+            }
+            
+            dadosAgendamento.telefone = telefone;
+            mostrarPasso(2);
+        }
+
+        function selecionarBanca(nomeBanca) {
+            dadosAgendamento.banca = nomeBanca;
+            document.getElementById('bancaSelecionada').textContent = '📍 ' + nomeBanca;
+            mostrarPasso(3);
+        }
+
+        function selecionarDia(diasParaAdicionar) {
+            // Remove seleção anterior
+            document.querySelectorAll('.dia-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Marca botão como selecionado
+            const btnClicado = document.querySelector(`.dia-btn[data-dia="${diasParaAdicionar}"]`);
+            if (btnClicado) {
+                btnClicado.classList.add('selected');
+            }
+            
+            // Calcula a data real baseada em quantos dias adicionar
+            const hoje = new Date();
+            let dataAlvo = new Date(hoje);
+            
+            if (diasParaAdicionar === 0) {
+                // Hoje
+                dataAlvo = hoje;
+            } else if (diasParaAdicionar === 1) {
+                // Amanhã
+                dataAlvo.setDate(hoje.getDate() + 1);
+            } else {
+                // Para dias da semana (segunda a domingo = 2 a 8)
+                // Precisa calcular próximo dia da semana
+                const diaSemanaSelecionado = diasParaAdicionar - 2; // 0=segunda, 1=terça... 6=domingo
+                const diaAtual = hoje.getDay(); // 0=domingo, 1=segunda... 6=sábado
+                
+                // Converte domingo (0) para 7 para facilitar cálculo
+                const diaAtualAjustado = diaAtual === 0 ? 7 : diaAtual;
+                const diaSelecionadoAjustado = diaSemanaSelecionado === 6 ? 0 : diaSemanaSelecionado + 1;
+                
+                let diasParaProximo;
+                if (diaSelecionadoAjustado >= diaAtualAjustado) {
+                    diasParaProximo = diaSelecionadoAjustado - diaAtualAjustado;
+                } else {
+                    diasParaProximo = 7 - diaAtualAjustado + diaSelecionadoAjustado;
+                }
+                
+                // Se é o mesmo dia da semana, vai para próxima semana
+                if (diasParaProximo === 0) {
+                    diasParaProximo = 7;
+                }
+                
+                dataAlvo.setDate(hoje.getDate() + diasParaProximo);
+            }
+            
+            dadosAgendamento.diaSelecionado = diasParaAdicionar;
+            dadosAgendamento.dataCompleta = dataAlvo;
+            
+            console.log('Dia selecionado:', dataAlvo.toLocaleDateString('pt-BR'));
+            atualizarPreviewAgendamento();
+        }
+
+        function selecionarHorario(horario) {
+            // Remove seleção anterior
+            document.querySelectorAll('.horario-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Marca botão como selecionado
+            const btnClicado = document.querySelector(`.horario-btn[data-horario="${horario}"]`);
+            if (btnClicado) {
+                btnClicado.classList.add('selected');
+            }
+            
+            dadosAgendamento.horarioSelecionado = horario;
+            console.log('Horário selecionado:', horario);
+            atualizarPreviewAgendamento();
+        }
+
+        function atualizarPreviewAgendamento() {
+            const preview = document.getElementById('previewAgendamento');
+            const previewTexto = document.getElementById('previewTexto');
+            
+            // Se tem dia E horário selecionados, mostra o preview
+            if (dadosAgendamento.dataCompleta && dadosAgendamento.horarioSelecionado) {
+                const dataFormatada = dadosAgendamento.dataCompleta.toLocaleDateString('pt-BR', {
+                    weekday: 'long',
+                    day: 'numeric',
+                    month: 'long'
+                });
+                
+                previewTexto.textContent = `${dataFormatada} às ${dadosAgendamento.horarioSelecionado}`;
+                preview.style.display = 'block';
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+
+        function voltarPasso2() {
+            mostrarPasso(2);
+        }
+
+        function finalizarAgendamento() {
+            // Valida se dia e horário foram selecionados
+            if (!dadosAgendamento.dataCompleta || !dadosAgendamento.horarioSelecionado) {
+                alert('Por favor, selecione o dia e o horário da sua visita.');
+                return;
+            }
+            
+            // Usa a data calculada
+            const dataObj = dadosAgendamento.dataCompleta;
+            const horario = dadosAgendamento.horarioSelecionado;
+            
+            // Formata a data para exibição (pt-BR)
+            const dataFormatada = dataObj.toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+            });
+            
+            // Formata data e hora para webhook (DD-MMM-YYYY HH:MM AM/PM)
+            const mesesAbrev = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+            const dia = String(dataObj.getDate()).padStart(2, '0');
+            const mes = mesesAbrev[dataObj.getMonth()];
+            const ano = dataObj.getFullYear();
+            
+            // Converte horário para formato 12h com AM/PM
+            const [hora24, minuto] = horario.split(':');
+            let hora12 = parseInt(hora24);
+            const periodo = hora12 >= 12 ? 'PM' : 'AM';
+            hora12 = hora12 % 12 || 12; // Converte 0 para 12
+            const horarioFormatado = `${String(hora12).padStart(2, '0')}:${minuto} ${periodo}`;
+            
+            const dataHoraWebhook = `${dia}-${mes}-${ano} ${horarioFormatado}`;
+            
+            // Formata data e hora no padrão brasileiro (exemplo: dia 25 de dezembro às 14:00 horas)
+            const mesesPorExtenso = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+            const mesPorExtenso = mesesPorExtenso[dataObj.getMonth()];
+            const dataHoraBrasil = `dia ${parseInt(dia)} de ${mesPorExtenso} às ${horario} horas`;
+            
+            // Calcula datas para automações
+            // 1 dia DEPOIS da data escolhida (09:00 AM)
+            const dataDepois = new Date(dataObj);
+            dataDepois.setDate(dataDepois.getDate() + 1);
+            const diaDepois = String(dataDepois.getDate()).padStart(2, '0');
+            const mesDepois = mesesAbrev[dataDepois.getMonth()];
+            const anoDepois = dataDepois.getFullYear();
+            const data_1_dia_depois = `${diaDepois}-${mesDepois}-${anoDepois} 09:00 AM`;
+            
+            // 1 dia ANTES da data escolhida (09:00 AM)
+            const dataUmDiaAntes = new Date(dataObj);
+            dataUmDiaAntes.setDate(dataUmDiaAntes.getDate() - 1);
+            const diaUmAntes = String(dataUmDiaAntes.getDate()).padStart(2, '0');
+            const mesUmAntes = mesesAbrev[dataUmDiaAntes.getMonth()];
+            const anoUmAntes = dataUmDiaAntes.getFullYear();
+            const data_1_dia_antes = `${diaUmAntes}-${mesUmAntes}-${anoUmAntes} 09:00 AM`;
+            
+            // 5 dias ANTES da data escolhida (09:00 AM)
+            const dataCincoDiasAntes = new Date(dataObj);
+            dataCincoDiasAntes.setDate(dataCincoDiasAntes.getDate() - 5);
+            const diaCincoAntes = String(dataCincoDiasAntes.getDate()).padStart(2, '0');
+            const mesCincoAntes = mesesAbrev[dataCincoDiasAntes.getMonth()];
+            const anoCincoAntes = dataCincoDiasAntes.getFullYear();
+            const data_5_dias_antes = `${diaCincoAntes}-${mesCincoAntes}-${anoCincoAntes} 09:00 AM`;
+            
+            console.log('Data/Hora formatada para webhook (EN):', dataHoraWebhook);
+            console.log('Data/Hora formatada para webhook (BR):', dataHoraBrasil);
+            console.log('Lembrete 1 dia depois:', data_1_dia_depois);
+            console.log('Lembrete 1 dia antes:', data_1_dia_antes);
+            console.log('Lembrete 5 dias antes:', data_5_dias_antes);
+            
+            // Preenche o resumo
+            document.getElementById('resumoBanca').textContent = dadosAgendamento.banca;
+            document.getElementById('resumoData').textContent = dataFormatada;
+            document.getElementById('resumoHorario').textContent = horario;
+            
+            // Envia para o webhook
+            enviarWebhook({
+                telefone: dadosAgendamento.telefone,
+                banca: dadosAgendamento.banca,
+                data_hora_agendamento: dataHoraWebhook,
+                data_hora_agendamento_brasil: dataHoraBrasil,
+                data_lembrete_1_dia_depois: data_1_dia_depois,
+                data_lembrete_1_dia_antes: data_1_dia_antes,
+                data_lembrete_5_dias_antes: data_5_dias_antes,
+                tipo_acao: 'agendamento_desconto_20',
+                desconto: '20%',
+                timestamp: new Date().toISOString()
+            });
+            
+            // Envia evento para Meta Pixel
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Schedule', {
+                    content_name: 'Agendamento 20% Desconto',
+                    value: 20,
+                    currency: 'BRL'
+                });
+            }
+            
+            mostrarPasso(4);
+        }
+
+        // Atualiza a função de fechar captura para resetar os passos
+        function fecharCaptura() {
+            document.getElementById('modalCapturaNome').style.display = 'none';
+            document.getElementById('telefoneCaptura').value = '';
+            document.getElementById('dataVisita').value = '';
+            document.getElementById('horarioVisita').value = '';
+            
+            // Reseta para o passo 1
+            mostrarPasso(1);
+            
+            // Limpa dados
+            dadosAgendamento = {
+                telefone: '',
+                banca: '',
+                data: '',
+                horario: ''
+            };
+            
+            capturaAcao = '';
+            capturaProduto = '';
         }
 
         // Event listeners e renderização inicial
