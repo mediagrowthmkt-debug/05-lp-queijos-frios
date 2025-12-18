@@ -2121,9 +2121,9 @@
                     <button class="semana-btn" onclick="selecionarSemana('proxima')">Próxima Semana</button>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px;">
-                    <button class="dia-btn" data-dia="0" onclick="selecionarDia(0)">Hoje</button>
-                    <button class="dia-btn" data-dia="1" onclick="selecionarDia(1)">Amanhã</button>
+                <div id="diasGrid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px;">
+                    <button class="dia-btn btn-hoje-amanha" data-dia="0" onclick="selecionarDia(0)">Hoje</button>
+                    <button class="dia-btn btn-hoje-amanha" data-dia="1" onclick="selecionarDia(1)">Amanhã</button>
                     <button class="dia-btn" data-dia="2" onclick="selecionarDia(2)">Seg</button>
                     <button class="dia-btn" data-dia="3" onclick="selecionarDia(3)">Ter</button>
                     <button class="dia-btn" data-dia="4" onclick="selecionarDia(4)">Qua</button>
@@ -2380,6 +2380,72 @@
             semanaOffset: 0 // 0 = esta semana, 7 = próxima semana
         };
 
+        function atualizarBotoesDias() {
+            const hoje = new Date();
+            hoje.setHours(0, 0, 0, 0);
+            const diaAtualSemana = hoje.getDay(); // 0=Dom, 1=Seg, 2=Ter, 3=Qua, 4=Qui, 5=Sex, 6=Sáb
+            
+            // Mapeamento: data-dia → dia da semana JavaScript
+            const mapeamento = {
+                2: 1, // Segunda
+                3: 2, // Terça
+                4: 3, // Quarta
+                5: 4, // Quinta
+                6: 5, // Sexta
+                7: 6, // Sábado
+                8: 0  // Domingo
+            };
+            
+            // Atualiza botão Hoje
+            const btnHoje = document.querySelector('.dia-btn[data-dia="0"]');
+            if (btnHoje) {
+                btnHoje.textContent = `Hoje (${hoje.getDate()})`;
+            }
+            
+            // Atualiza botão Amanhã
+            const amanha = new Date(hoje);
+            amanha.setDate(hoje.getDate() + 1);
+            const btnAmanha = document.querySelector('.dia-btn[data-dia="1"]');
+            if (btnAmanha) {
+                btnAmanha.textContent = `Amanhã (${amanha.getDate()})`;
+            }
+            
+            // Nomes abreviados dos dias
+            const nomesDias = {
+                2: 'Seg',
+                3: 'Ter',
+                4: 'Qua',
+                5: 'Qui',
+                6: 'Sex',
+                7: 'Sáb',
+                8: 'Dom'
+            };
+            
+            // Atualiza os botões dos dias da semana (Seg a Dom)
+            for (let dataDia = 2; dataDia <= 8; dataDia++) {
+                const btn = document.querySelector(`.dia-btn[data-dia="${dataDia}"]`);
+                if (btn) {
+                    const diaSemanaSelecionado = mapeamento[dataDia];
+                    
+                    // Calcula quantos dias até o próximo dia desejado
+                    let diasAteProximo = (diaSemanaSelecionado - diaAtualSemana + 7) % 7;
+                    if (diasAteProximo === 0) {
+                        diasAteProximo = 7;
+                    }
+                    
+                    // Para "Próxima Semana": adiciona mais 7 dias
+                    if (dadosAgendamento.semanaOffset > 0) {
+                        diasAteProximo += 7;
+                    }
+                    
+                    const dataAlvo = new Date(hoje);
+                    dataAlvo.setDate(hoje.getDate() + diasAteProximo);
+                    
+                    btn.textContent = `${nomesDias[dataDia]} (${dataAlvo.getDate()})`;
+                }
+            }
+        }
+
         function selecionarSemana(tipo) {
             // Remove classe active de todos os botões de semana
             document.querySelectorAll('.semana-btn').forEach(btn => btn.classList.remove('active'));
@@ -2390,10 +2456,26 @@
             // Define o offset da semana
             dadosAgendamento.semanaOffset = tipo === 'esta' ? 0 : 7;
             
+            // Mostra/esconde botões Hoje e Amanhã
+            const botoesHojeAmanha = document.querySelectorAll('.btn-hoje-amanha');
+            const diasGrid = document.getElementById('diasGrid');
+            
+            if (tipo === 'proxima') {
+                // Esconde Hoje e Amanhã
+                botoesHojeAmanha.forEach(btn => btn.style.display = 'none');
+                // Ajusta grid para 7 dias (7 colunas não fica bom, mantém 3 colunas)
+            } else {
+                // Mostra Hoje e Amanhã
+                botoesHojeAmanha.forEach(btn => btn.style.display = 'block');
+            }
+            
             // Limpa seleção de dia anterior
             document.querySelectorAll('.dia-btn').forEach(btn => btn.classList.remove('selected'));
             dadosAgendamento.diaSelecionado = null;
             dadosAgendamento.dataCompleta = null;
+            
+            // Atualiza os textos dos botões com as datas
+            atualizarBotoesDias();
             
             // Atualiza preview
             atualizarPreviewAgendamento();
@@ -2423,6 +2505,10 @@
         function selecionarBanca(nomeBanca) {
             dadosAgendamento.banca = nomeBanca;
             document.getElementById('bancaSelecionada').textContent = '📍 ' + nomeBanca;
+            
+            // Atualiza os botões com as datas ao entrar no passo 3
+            atualizarBotoesDias();
+            
             mostrarPasso(3);
         }
 
@@ -2438,46 +2524,61 @@
                 btnClicado.classList.add('selected');
             }
             
-            // Calcula a data real baseada em quantos dias adicionar
+            // Calcula a data real
             const hoje = new Date();
+            hoje.setHours(0, 0, 0, 0);
             let dataAlvo = new Date(hoje);
             
             if (diasParaAdicionar === 0) {
-                // Hoje + offset da semana
-                dataAlvo.setDate(hoje.getDate() + dadosAgendamento.semanaOffset);
+                // Hoje - apenas válido para "Esta Semana"
+                dataAlvo = new Date(hoje);
             } else if (diasParaAdicionar === 1) {
-                // Amanhã + offset da semana
-                dataAlvo.setDate(hoje.getDate() + 1 + dadosAgendamento.semanaOffset);
+                // Amanhã - apenas válido para "Esta Semana"
+                dataAlvo = new Date(hoje);
+                dataAlvo.setDate(hoje.getDate() + 1);
             } else {
-                // Para dias da semana (segunda a domingo = 2 a 8)
-                // Precisa calcular próximo dia da semana
-                const diaSemanaSelecionado = diasParaAdicionar - 2; // 0=segunda, 1=terça... 6=domingo
-                const diaAtual = hoje.getDay(); // 0=domingo, 1=segunda... 6=sábado
+                // Mapeamento: botão → dia da semana JavaScript
+                // Seg=2→1, Ter=3→2, Qua=4→3, Qui=5→4, Sex=6→5, Sáb=7→6, Dom=8→0
+                const mapeamento = {
+                    2: 1, // Segunda
+                    3: 2, // Terça
+                    4: 3, // Quarta
+                    5: 4, // Quinta
+                    6: 5, // Sexta
+                    7: 6, // Sábado
+                    8: 0  // Domingo
+                };
                 
-                // Converte domingo (0) para 7 para facilitar cálculo
-                const diaAtualAjustado = diaAtual === 0 ? 7 : diaAtual;
-                const diaSelecionadoAjustado = diaSemanaSelecionado === 6 ? 0 : diaSemanaSelecionado + 1;
+                const diaSemanaSelecionado = mapeamento[diasParaAdicionar]; // Dia da semana desejado (0-6)
+                const diaAtualSemana = hoje.getDay(); // 0=Dom, 1=Seg, 2=Ter, 3=Qua, 4=Qui, 5=Sex, 6=Sáb
                 
-                let diasParaProximo;
-                if (diaSelecionadoAjustado >= diaAtualAjustado) {
-                    diasParaProximo = diaSelecionadoAjustado - diaAtualAjustado;
-                } else {
-                    diasParaProximo = 7 - diaAtualAjustado + diaSelecionadoAjustado;
+                // Calcula quantos dias até o próximo dia desejado
+                // Fórmula: (diaDesejado - diaAtual + 7) % 7
+                // Se o resultado for 0, significa que é o mesmo dia da semana
+                let diasAteProximo = (diaSemanaSelecionado - diaAtualSemana + 7) % 7;
+                
+                // Se deu 0 (mesmo dia da semana), para "Esta Semana" seria hoje,
+                // mas como já temos botão "Hoje", aqui vai para próxima ocorrência (7 dias)
+                if (diasAteProximo === 0) {
+                    diasAteProximo = 7;
                 }
                 
-                // Se é o mesmo dia da semana, vai para próxima semana
-                if (diasParaProximo === 0) {
-                    diasParaProximo = 7;
+                // Para "Próxima Semana": sempre adiciona mais 7 dias
+                if (dadosAgendamento.semanaOffset > 0) {
+                    diasAteProximo += 7;
                 }
                 
-                // Adiciona o offset da semana selecionada
-                dataAlvo.setDate(hoje.getDate() + diasParaProximo + dadosAgendamento.semanaOffset);
+                console.log('DEBUG: botao=', diasParaAdicionar, 'diaJS=', diaSemanaSelecionado, 'hoje=', diaAtualSemana, 'diasAteProximo=', diasAteProximo, 'offset=', dadosAgendamento.semanaOffset);
+                
+                dataAlvo.setDate(hoje.getDate() + diasAteProximo);
             }
             
             dadosAgendamento.diaSelecionado = diasParaAdicionar;
             dadosAgendamento.dataCompleta = dataAlvo;
             
-            console.log('Dia selecionado:', dataAlvo.toLocaleDateString('pt-BR'));
+            const diaSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'][dataAlvo.getDay()];
+            console.log(`Botão ${diasParaAdicionar} → ${diaSemana} ${dataAlvo.getDate()}/${dataAlvo.getMonth()+1}/${dataAlvo.getFullYear()}`);
+            
             atualizarPreviewAgendamento();
         }
 
@@ -2645,6 +2746,9 @@
             document.querySelectorAll('.semana-btn').forEach(btn => btn.classList.remove('active'));
             const btnEstaSemana = document.querySelector('.semana-btn');
             if (btnEstaSemana) btnEstaSemana.classList.add('active');
+            
+            // Mostra botões "Hoje" e "Amanhã" novamente
+            document.querySelectorAll('.btn-hoje-amanha').forEach(btn => btn.style.display = 'block');
             
             // Limpa seleções de dia e horário
             document.querySelectorAll('.dia-btn').forEach(btn => btn.classList.remove('selected'));
