@@ -1691,7 +1691,7 @@
                 <button class="cta-button" onclick="scrollToProdutos()" aria-label="Ver produtos disponíveis">
                     👅 Ver Produtos
                 </button>
-                <button class="cta-button cta-button-secondary" onclick="abrirWhatsApp('Hero - Contato Direto')" aria-label="Entrar em contato via WhatsApp">
+                <button class="cta-button cta-button-secondary" onclick="abrirWhatsApp('Degustação Gratuita', 'hero')" aria-label="Entrar em contato via WhatsApp">
                     💬 WhatsApp
                 </button>
             </div>
@@ -2060,7 +2060,7 @@
     </footer>
 
     <!-- WhatsApp Float Button -->
-    <a href="javascript:void(0)" class="whatsapp-float" onclick="abrirWhatsApp('Atendimento Geral')" title="WhatsApp" aria-label="Abrir WhatsApp">
+    <a href="javascript:void(0)" class="whatsapp-float" onclick="abrirWhatsApp('Atendimento Geral', 'float')" title="WhatsApp" aria-label="Abrir WhatsApp">
         <img src="whatsappicon.webp" alt="WhatsApp Atendimento" width="42" height="42" decoding="async">
     </a>
 
@@ -2284,7 +2284,29 @@
 
         // FUNÇÕES DE INTERAÇÃO COM TRACKING
         function abrirWhatsApp(produto, secao = 'produtos') {
-            abrirCapturaWhatsApp(produto, secao);
+            // Mensagens personalizadas por contexto
+            let mensagem = '';
+            
+            if (secao === 'hero') {
+                mensagem = '🧀 Olá! Gostaria de experimentar os queijos antes de comprar! 📱 Vim da página de Degustação Gratuita.';
+            } else if (secao === 'localizacoes') {
+                mensagem = `🧀 Olá! Gostaria de agendar uma degustação na ${produto}! 📱 Vim da página de Degustação Gratuita.`;
+            } else if (secao === 'float') {
+                mensagem = '🧀 Olá! Gostaria de agendar uma degustação gratuita de queijos! 📱 Vim da página de Degustação Gratuita.';
+            } else if (produto && produto.includes('Queijos')) {
+                mensagem = `🧀 Olá! Tenho interesse em *${produto}*! Gostaria de agendar uma degustação. 📱 Vim da página de Degustação Gratuita.`;
+            } else if (produto && produto.includes('Frios')) {
+                mensagem = `🧀 Olá! Tenho interesse em *${produto}*! Gostaria de agendar uma degustação. 📱 Vim da página de Degustação Gratuita.`;
+            } else {
+                mensagem = '🧀 Olá! Gostaria de agendar uma degustação gratuita de queijos e frios! 📱 Vim da página de Degustação Gratuita.';
+            }
+            
+            // Codifica a mensagem para URL
+            const mensagemCodificada = encodeURIComponent(mensagem);
+            const urlWhatsApp = `https://api.whatsapp.com/send/?phone=5548984118953&text=${mensagemCodificada}`;
+            
+            // Abre WhatsApp em nova aba
+            window.open(urlWhatsApp, '_blank');
         }
 
     // VARIÁVEIS PARA CAPTURA
