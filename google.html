@@ -11,6 +11,24 @@
       gtag('config', 'AW-16620453518');
     </script>
 
+    <!-- Event snippet for Whatsapp LP mediagrowth conversion page -->
+    <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-16449685513/e0ywCKOr6tcbEImQ6aM9',
+          'value': 1.0,
+          'currency': 'BRL',
+          'event_callback': callback
+      });
+      return false;
+    }
+    </script>
+
     <!-- LP DEGUSTAÇÃO CORTESIA - BANCA PACHECO - GOOGLE VERSION -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -2315,8 +2333,8 @@
             const mensagemCodificada = encodeURIComponent(mensagem);
             const urlWhatsApp = `https://api.whatsapp.com/send/?phone=5548984118953&text=${mensagemCodificada}`;
             
-            // Abre WhatsApp em nova aba
-            window.open(urlWhatsApp, '_blank');
+            // Dispara evento de conversão do Google Ads e abre WhatsApp
+            gtag_report_conversion(urlWhatsApp);
         }
 
     // VARIÁVEIS PARA CAPTURA
