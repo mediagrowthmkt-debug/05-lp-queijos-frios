@@ -2284,26 +2284,12 @@
 
         // FUNÇÕES DE INTERAÇÃO COM TRACKING
         function abrirWhatsApp(produto, secao = 'produtos') {
-            // Mensagens personalizadas por contexto
-            let mensagem = '';
+            // Mensagem padrão com origem Meta
+            const mensagem = '🧀 Olá, vim pela Meta! Gostaria de saber mais sobre os queijos e a localização. 📱';
             
-            if (secao === 'hero') {
-                mensagem = '🧀 Olá! Gostaria de experimentar os queijos antes de comprar! 📱 Vim da página de Degustação Gratuita.';
-            } else if (secao === 'localizacoes') {
-                mensagem = `🧀 Olá! Gostaria de agendar uma degustação na ${produto}! 📱 Vim da página de Degustação Gratuita.`;
-            } else if (secao === 'float') {
-                mensagem = '🧀 Olá! Gostaria de agendar uma degustação gratuita de queijos! 📱 Vim da página de Degustação Gratuita.';
-            } else if (produto && produto.includes('Queijos')) {
-                mensagem = `🧀 Olá! Tenho interesse em *${produto}*! Gostaria de agendar uma degustação. 📱 Vim da página de Degustação Gratuita.`;
-            } else if (produto && produto.includes('Frios')) {
-                mensagem = `🧀 Olá! Tenho interesse em *${produto}*! Gostaria de agendar uma degustação. 📱 Vim da página de Degustação Gratuita.`;
-            } else {
-                mensagem = '🧀 Olá! Gostaria de agendar uma degustação gratuita de queijos e frios! 📱 Vim da página de Degustação Gratuita.';
-            }
-            
-            // Dispara evento de conversão do Facebook Pixel
+            // Dispara evento de LEAD do Facebook Pixel
             if (typeof fbq !== 'undefined') {
-                fbq('track', 'Contact', {
+                fbq('track', 'Lead', {
                     content_name: produto,
                     content_category: secao,
                     value: 1.0,
@@ -3229,10 +3215,10 @@
             const todasImagens = document.querySelectorAll('.marquee-image, .hero-marquee-item img');
             todasImagens.forEach(img => {
                 img.addEventListener('click', function(e) {
-                    // Dispara evento de conversão do Facebook Pixel
+                    // Dispara evento de LEAD do Facebook Pixel
                     if (typeof fbq !== 'undefined') {
                         const produtoNome = this.alt || 'Produto';
-                        fbq('track', 'ViewContent', {
+                        fbq('track', 'Lead', {
                             content_name: produtoNome,
                             content_type: 'product_image',
                             value: 1.0,
