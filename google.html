@@ -11,24 +11,6 @@
       gtag('config', 'AW-16620453518');
     </script>
 
-    <!-- Event snippet for Whatsapp LP mediagrowth conversion page -->
-    <script>
-    function gtag_report_conversion(url) {
-      var callback = function () {
-        if (typeof(url) != 'undefined') {
-          window.location = url;
-        }
-      };
-      gtag('event', 'conversion', {
-          'send_to': 'AW-16449685513/e0ywCKOr6tcbEImQ6aM9',
-          'value': 1.0,
-          'currency': 'BRL',
-          'event_callback': callback
-      });
-      return false;
-    }
-    </script>
-
     <!-- LP DEGUSTAÇÃO CORTESIA - BANCA PACHECO - GOOGLE VERSION -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -2263,19 +2245,23 @@
         setInterval(changeHeroBackground, 20000);
 
         function scrollToProdutos() {
-            document.getElementById('produtos').scrollIntoView({ behavior: 'smooth' });
+            trackConversion(function() {
+                document.getElementById('produtos').scrollIntoView({ behavior: 'smooth' });
+            });
         }
 
         function scrollToFooter() {
-            const sec = document.getElementById('localizacoes-bancas');
-            if (sec) {
-                sec.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                const modal = document.getElementById('modalLojas');
-                if (modal) {
-                    modal.style.display = 'block';
+            trackConversion(function() {
+                const sec = document.getElementById('localizacoes-bancas');
+                if (sec) {
+                    sec.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    const modal = document.getElementById('modalLojas');
+                    if (modal) {
+                        modal.style.display = 'block';
+                    }
                 }
-            }
+            });
         }
 
         function fecharModal(modalId) {
@@ -2311,6 +2297,24 @@
         }
 
         // FUNÇÕES DE INTERAÇÃO COM TRACKING
+        
+        // Função universal para rastrear conversões
+        function trackConversion(callback) {
+            // Dispara evento de conversão do Google Ads
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-16449685513/e0ywCKOr6tcbEImQ6aM9',
+                    'value': 1.0,
+                    'currency': 'BRL',
+                    'event_callback': callback
+                });
+            } else {
+                // Se gtag não estiver disponível, executa o callback diretamente
+                callback();
+            }
+            return false;
+        }
+        
         function abrirWhatsApp(produto, secao = 'produtos') {
             // Mensagens personalizadas por contexto
             let mensagem = '';
@@ -2334,7 +2338,9 @@
             const urlWhatsApp = `https://api.whatsapp.com/send/?phone=5548984118953&text=${mensagemCodificada}`;
             
             // Dispara evento de conversão do Google Ads e abre WhatsApp
-            gtag_report_conversion(urlWhatsApp);
+            trackConversion(function() {
+                window.location.href = urlWhatsApp;
+            });
         }
 
     // VARIÁVEIS PARA CAPTURA
