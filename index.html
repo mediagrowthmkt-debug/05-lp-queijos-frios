@@ -2301,6 +2301,16 @@
                 mensagem = '🧀 Olá! Gostaria de agendar uma degustação gratuita de queijos e frios! 📱 Vim da página de Degustação Gratuita.';
             }
             
+            // Dispara evento de conversão do Facebook Pixel
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Contact', {
+                    content_name: produto,
+                    content_category: secao,
+                    value: 1.0,
+                    currency: 'BRL'
+                });
+            }
+            
             // Codifica a mensagem para URL
             const mensagemCodificada = encodeURIComponent(mensagem);
             const urlWhatsApp = `https://api.whatsapp.com/send/?phone=5548984118953&text=${mensagemCodificada}`;
@@ -3214,6 +3224,23 @@
             const marqueeFrios = document.getElementById('marqueeFrios');
             const htmlFrios = produtosFrios.map(criarMarqueeItem).join('');
             marqueeFrios.innerHTML = htmlFrios;
+
+            // Adicionar rastreamento de cliques em todas as imagens de produtos
+            const todasImagens = document.querySelectorAll('.marquee-image, .hero-marquee-item img');
+            todasImagens.forEach(img => {
+                img.addEventListener('click', function(e) {
+                    // Dispara evento de conversão do Facebook Pixel
+                    if (typeof fbq !== 'undefined') {
+                        const produtoNome = this.alt || 'Produto';
+                        fbq('track', 'ViewContent', {
+                            content_name: produtoNome,
+                            content_type: 'product_image',
+                            value: 1.0,
+                            currency: 'BRL'
+                        });
+                    }
+                });
+            });
 
             // Inicializar interação touch para todos os marquee-wrappers
             initMarqueeTouch();
